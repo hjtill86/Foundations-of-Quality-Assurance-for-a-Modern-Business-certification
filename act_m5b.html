@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 5B — Risk Control Evaluation Discussion | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:120px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.grey{background:#6c757d}.btn.grey:hover{background:#5a6268}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.drop-zone{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:80px;background:#f8fffe;margin-bottom:10px}
+.drop-zone h5{font-size:.78rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:7px 11px;font-size:.86rem;margin-bottom:6px}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;margin-bottom:10px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.risk-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:8px}
+.risk-row select,.risk-row input{border:1px solid #cdd6e0;border-radius:6px;padding:6px 8px;font-family:inherit;font-size:.85rem;width:100%}
+.risk-row select:focus,.risk-row input:focus{outline:none;border-color:#00827F}
+.rlabel{font-size:.78rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.4px}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}.risk-row{grid-template-columns:1fr 1fr}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 5 | ACTIVITY B</div><h1>Activity 5B — Risk Control Evaluation Discussion</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Evaluate the adequacy of existing risk controls and propose improvements using the hierarchy of controls framework.</div>
+
+<p class="section-title">Scenario</p>
+<div class="scenario-card">
+  <strong>Streamline Manufacturing</strong> produces plastic components. They have identified the following current controls for three key operational risks. Your task is to evaluate whether each control is sufficient and recommend improvements.
+  <br><br>
+  <strong>Risk A:</strong> Chemical spillage in the mixing area. <em>Current control:</em> Staff advised to "be careful" — verbal instruction only.<br><br>
+  <strong>Risk B:</strong> Incorrect material loaded into press. <em>Current control:</em> Visual inspection by operator.<br><br>
+  <strong>Risk C:</strong> Equipment failure causing production halt. <em>Current control:</em> Reactive maintenance — repair when broken.
+</div>
+
+<p class="section-title">Hierarchy of Controls Reference</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px">
+  <span style="background:#dc3545;color:#fff;border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700">1. Elimination</span>
+  <span style="background:#fd7e14;color:#fff;border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700">2. Substitution</span>
+  <span style="background:#ffc107;color:#1a2535;border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700">3. Engineering Controls</span>
+  <span style="background:#0d6efd;color:#fff;border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700">4. Administrative Controls</span>
+  <span style="background:#28a745;color:#fff;border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700">5. PPE</span>
+</div>
+
+<p class="section-title">Question 1 — Evaluate Risk A</p>
+<p style="font-size:.92rem;margin-bottom:8px">Is "be careful" adequate as a control? What level of the hierarchy is this? What should replace or supplement it?</p>
+<textarea id="q1" placeholder="'Be careful' is an administrative control at the lowest effectiveness tier. It relies entirely on individual behavior and provides no physical barrier. It should be supplemented with engineering controls such as..."></textarea>
+
+<p class="section-title">Question 2 — Evaluate Risk B</p>
+<p style="font-size:.92rem;margin-bottom:8px">Assess the visual inspection control. What control level is this? What stronger control would reduce reliance on human judgment?</p>
+<textarea id="q2" placeholder="Visual inspection is an administrative control. It is susceptible to operator error and fatigue. A stronger engineering control would be a barcode or RFID material verification system that..."></textarea>
+
+<p class="section-title">Question 3 — Evaluate Risk C</p>
+<p style="font-size:.92rem;margin-bottom:8px">Reactive maintenance is not a risk control — it is a response. What proactive control should replace it? Name the control and explain its benefit.</p>
+<textarea id="q3" placeholder="Reactive maintenance should be replaced with a Preventive Maintenance Program (PMP) that includes scheduled inspections at defined intervals..."></textarea>
+
+<div class="submit-area">
+  <button class="btn teal" onclick="sub()">Submit Analysis</button>
+  <button class="btn grey" style="margin-left:10px" onclick="reveal()">Reveal Model Answer</button>
+  <div class="result" id="res" style="margin-top:14px"></div>
+</div>
+</div>
+
+<div class="card" style="background:#f8f9fa">
+<p class="section-title">Model Answer</p>
+<div id="model" style="display:none">
+  <div class="step"><span class="step-num">A</span><span><strong>Risk A:</strong> "Be careful" is a weak administrative control. Replace with: (1) Engineering control — install spill containment bunds and chemical splash guards. (2) Administrative — formal chemical handling SOP and PPE requirement. (3) PPE — gloves, goggles, and apron mandated for all mixing tasks.</span></div>
+  <div class="step"><span class="step-num">B</span><span><strong>Risk B:</strong> Visual inspection is an administrative control susceptible to fatigue and distraction. Stronger control: barcode scanning or RFID material verification at press loading point — an engineering control that prevents wrong material from being loaded regardless of operator attentiveness.</span></div>
+  <div class="step"><span class="step-num">C</span><span><strong>Risk C:</strong> Reactive maintenance is not a control. Replace with a <em>Preventive Maintenance Program</em>: scheduled inspection and servicing at intervals based on manufacturer guidance and usage data. This eliminates unplanned breakdowns and converts risk management from reactive to proactive.</span></div>
+</div>
+<button class="btn grey" onclick="reveal()">Show Model Answer</button>
+</div>
+
+<script>
+function sub(){
+  var q1=document.getElementById("q1").value.trim();
+  var q2=document.getElementById("q2").value.trim();
+  var q3=document.getElementById("q3").value.trim();
+  var r=document.getElementById("res");
+  if(q1.length<40||q2.length<40||q3.length<40){r.innerHTML="Please complete all three questions.";r.className="result show wrong";return;}
+  r.innerHTML="Responses recorded. Compare to the Model Answer below.";r.className="result show";
+}
+function reveal(){document.getElementById("model").style.display="block";}
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

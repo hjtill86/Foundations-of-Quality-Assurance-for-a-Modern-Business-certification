@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module 9 — Reporting & Continuous Improvement | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0;transition:color .2s}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.obj-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px;font-size:.91rem;line-height:1.6}
+.progress-wrap{margin-bottom:24px}
+.progress-label{display:flex;justify-content:space-between;font-size:.82rem;color:#5a6a7e;margin-bottom:6px}
+.progress-bar{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:#00827F;border-radius:3px;transition:width .4s}
+.q-block{margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid #f0f4f8}
+.q-block:last-of-type{border-bottom:none}
+.scenario-tag{display:inline-block;background:#fff3cd;color:#856404;font-size:.73rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:8px;border:1px solid #ffc107}
+.q-num{color:#00827F;font-size:.8rem;font-weight:700;margin-bottom:6px;letter-spacing:.5px}
+.q-text{font-weight:600;margin-bottom:14px;line-height:1.55;font-size:.96rem}
+.options label{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;margin-bottom:8px;transition:all .2s;font-size:.92rem;line-height:1.4;user-select:none}
+.options label:hover{border-color:#00827F;background:#f0faf9}
+.options input[type=radio]{margin-top:2px;accent-color:#00827F;flex-shrink:0}
+.options label.correct{border-color:#28a745!important;background:#d4edda!important}
+.options label.wrong{border-color:#dc3545!important;background:#fdf0f0!important}
+.options label.show-ans{border-color:#28a745!important;background:#d4edda!important}
+.feedback{display:none;margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.88rem;line-height:1.5}
+.feedback.show{display:block}
+.feedback.ok{background:#d4edda;border:1px solid #c3e6cb;color:#155724}
+.feedback.bad{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:13px 28px;border-radius:8px;font-size:.97rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:4px}
+.btn:hover{background:#004a8f}.btn:disabled{background:#9aacbf;cursor:not-allowed}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.score-box{display:none;background:#003366;color:#fff;border-radius:12px;padding:32px;text-align:center;margin-top:24px}
+.score-box.show{display:block}
+.score-big{font-size:3rem;font-weight:700;color:#00e5d4}
+.score-lbl{margin-top:8px;font-size:1rem;opacity:.9}
+.result-lbl{font-weight:700;font-size:1.2rem;margin-top:14px}
+.pass{color:#7fffd4}.fail{color:#ff8fa3}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 9 QUIZ</div><h1>Module 9 — Reporting & Continuous Improvement</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+<div class="card">
+<div class="obj-box">&#127919; <strong>Quiz Objective:</strong> Covers nonconformance classification, the PDCA cycle application, and improvement backlog management.</div>
+<div class="progress-wrap">
+  <div class="progress-label"><span>Progress</span><span id="PLbl">0 / 8 answered</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="PFill" style="width:0%"></div></div>
+</div>
+<div class="q-block" id="QBm9_0"><div class="q-num">QUESTION 1 OF 8</div><div class="q-text">A nonconformance is best defined as:</div><div class="options"><label id="Lm9_0_0"><input type="radio" name="qm9_0" value="0" onchange="pick(0,0,1)">Any situation that reduces customer satisfaction</label><label id="Lm9_0_1"><input type="radio" name="qm9_0" value="1" onchange="pick(0,1,1)">A failure of a product, process, or system to meet a specified requirement</label><label id="Lm9_0_2"><input type="radio" name="qm9_0" value="2" onchange="pick(0,2,1)">An employee error that occurs more than once</label><label id="Lm9_0_3"><input type="radio" name="qm9_0" value="3" onchange="pick(0,3,1)">A quality improvement suggestion from the production team</label></div><div class="feedback" id="FBm9_0"></div></div>
+<div class="q-block" id="QBm9_1"><div class="q-num">QUESTION 2 OF 8</div><div class="q-text">A 'major nonconformance' is characterized by:</div><div class="options"><label id="Lm9_1_0"><input type="radio" name="qm9_1" value="0" onchange="pick(1,0,1)">A single isolated deviation with limited systemic implications</label><label id="Lm9_1_1"><input type="radio" name="qm9_1" value="1" onchange="pick(1,1,1)">A systemic failure affecting multiple instances or time periods that indicates a fundamental QMS element is not functioning</label><label id="Lm9_1_2"><input type="radio" name="qm9_1" value="2" onchange="pick(1,2,1)">A minor formatting error in a quality record</label><label id="Lm9_1_3"><input type="radio" name="qm9_1" value="3" onchange="pick(1,3,1)">Any finding that surprises the quality manager</label></div><div class="feedback" id="FBm9_1"></div></div>
+<div class="q-block" id="QBm9_2"><div class="q-num">QUESTION 3 OF 8</div><div class="q-text">In the PDCA cycle, the 'Check' phase involves:</div><div class="options"><label id="Lm9_2_0"><input type="radio" name="qm9_2" value="0" onchange="pick(2,0,2)">Designing the solution and defining success criteria</label><label id="Lm9_2_1"><input type="radio" name="qm9_2" value="1" onchange="pick(2,1,2)">Implementing the planned solution on a pilot basis</label><label id="Lm9_2_2"><input type="radio" name="qm9_2" value="2" onchange="pick(2,2,2)">Collecting and analyzing data to evaluate whether the solution achieved its planned objectives</label><label id="Lm9_2_3"><input type="radio" name="qm9_2" value="3" onchange="pick(2,3,2)">Standardizing successful solutions into procedures and training</label></div><div class="feedback" id="FBm9_2"></div></div>
+<div class="q-block" id="QBm9_3"><div class="q-num">QUESTION 4 OF 8</div><div class="q-text">The 'Act' phase of PDCA, when the solution was effective, involves:</div><div class="options"><label id="Lm9_3_0"><input type="radio" name="qm9_3" value="0" onchange="pick(3,0,2)">Returning to Plan with new data</label><label id="Lm9_3_1"><input type="radio" name="qm9_3" value="1" onchange="pick(3,1,2)">Implementing the solution on a larger scale without documentation</label><label id="Lm9_3_2"><input type="radio" name="qm9_3" value="2" onchange="pick(3,2,2)">Standardizing the solution into procedures and training, and identifying replication opportunities</label><label id="Lm9_3_3"><input type="radio" name="qm9_3" value="3" onchange="pick(3,3,2)">Closing the improvement project and moving on without documentation</label></div><div class="feedback" id="FBm9_3"></div></div>
+<div class="q-block" id="QBm9_4"><div class="q-num">QUESTION 5 OF 8</div><div class="q-text">An improvement backlog should be prioritized based on:</div><div class="options"><label id="Lm9_4_0"><input type="radio" name="qm9_4" value="0" onchange="pick(4,0,2)">Alphabetical order of process names</label><label id="Lm9_4_1"><input type="radio" name="qm9_4" value="1" onchange="pick(4,1,2)">The personal preferences of the quality manager</label><label id="Lm9_4_2"><input type="radio" name="qm9_4" value="2" onchange="pick(4,2,2)">Impact on quality outcomes, effort required, and compliance or safety risk of deferring action</label><label id="Lm9_4_3"><input type="radio" name="qm9_4" value="3" onchange="pick(4,3,2)">The order in which items were identified</label></div><div class="feedback" id="FBm9_4"></div></div>
+<div class="q-block" id="QBm9_5"><div class="q-num">QUESTION 6 OF 8</div><div class="q-text">Which is a valid source of items for an improvement backlog?</div><div class="options"><label id="Lm9_5_0"><input type="radio" name="qm9_5" value="0" onchange="pick(5,0,1)">Marketing campaign performance reports</label><label id="Lm9_5_1"><input type="radio" name="qm9_5" value="1" onchange="pick(5,1,1)">Internal audit findings, customer complaints, KPI trends, OFIs, and staff improvement suggestions</label><label id="Lm9_5_2"><input type="radio" name="qm9_5" value="2" onchange="pick(5,2,1)">Stock market performance data</label><label id="Lm9_5_3"><input type="radio" name="qm9_5" value="3" onchange="pick(5,3,1)">Annual employee satisfaction surveys only</label></div><div class="feedback" id="FBm9_5"></div></div>
+<div class="q-block" id="QBm9_6"><div class="q-num">QUESTION 7 OF 8</div><div class="scenario-tag">&#128203; SCENARIO-BASED</div><div class="q-text">A company identifies 12 improvement opportunities from an internal audit. They implement all 12 simultaneously without prioritization or ownership. Four weeks later, none are complete. What went wrong?</div><div class="options"><label id="Lm9_6_0"><input type="radio" name="qm9_6" value="0" onchange="pick(6,0,2)">The audit identified too many findings</label><label id="Lm9_6_1"><input type="radio" name="qm9_6" value="1" onchange="pick(6,1,2)">The improvements were too complex to implement</label><label id="Lm9_6_2"><input type="radio" name="qm9_6" value="2" onchange="pick(6,2,2)">The team lacked a prioritized backlog with clear ownership and deadlines — resource diffusion prevented progress</label><label id="Lm9_6_3"><input type="radio" name="qm9_6" value="3" onchange="pick(6,3,2)">The auditors should have provided corrective action plans</label></div><div class="feedback" id="FBm9_6"></div></div>
+<div class="q-block" id="QBm9_7"><div class="q-num">QUESTION 8 OF 8</div><div class="scenario-tag">&#128203; SCENARIO-BASED</div><div class="q-text">A PDCA cycle reduced customer complaint response time from 14 days to 4.8 days — beating the 5-day target. What should happen in the Act phase?</div><div class="options"><label id="Lm9_7_0"><input type="radio" name="qm9_7" value="0" onchange="pick(7,0,2)">Close the cycle — the target was met</label><label id="Lm9_7_1"><input type="radio" name="qm9_7" value="1" onchange="pick(7,1,2)">Return to Plan — more improvement is possible</label><label id="Lm9_7_2"><input type="radio" name="qm9_7" value="2" onchange="pick(7,2,2)">Standardize the new process into the SOP, train all staff, and monitor ongoing performance to sustain the gain</label><label id="Lm9_7_3"><input type="radio" name="qm9_7" value="3" onchange="pick(7,3,2)">Issue a CAPA to investigate why the target was exceeded</label></div><div class="feedback" id="FBm9_7"></div></div>
+<button class="btn teal" id="SubBtn" onclick="submitQuiz()" disabled>Submit Quiz</button>
+</div>
+<div class="score-box" id="ScoreBox">
+  <div class="score-big" id="ScoreNum">0/8</div>
+  <div class="score-lbl">Questions Correct</div>
+  <div class="result-lbl" id="ResultLbl"></div>
+  <p style="margin-top:16px;opacity:.8">Review highlighted answers above, then return to the course.</p>
+  <a href="../index.html" style="display:inline-block;margin-top:20px;color:#00e5d4;font-weight:700;">&#8592; Back to Course Hub</a>
+</div>
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+<script>
+var QS=[{"ans": 1, "exp": "A nonconformance is any failure to meet a specified requirement \u2014 it must be formally documented and addressed regardless of perceived severity."}, {"ans": 1, "exp": "A major nonconformance indicates a systemic breakdown \u2014 multiple instances, extended time periods, or fundamental QMS failures \u2014 requiring urgent corrective action."}, {"ans": 2, "exp": "The Check phase evaluates results against planned objectives using data \u2014 determining whether the Do phase actually worked before standardizing the change."}, {"ans": 2, "exp": "When effective, Act means standardizing the change into SOPs and training, sharing lessons learned, and identifying where the improvement can be replicated."}, {"ans": 2, "exp": "Backlog prioritization should balance potential quality impact, implementation effort, and the risk of delay \u2014 ensuring the most critical improvements receive earliest attention."}, {"ans": 1, "exp": "Improvement backlogs draw from all quality data sources \u2014 audit findings, complaints, metric trends, OFIs, management review outputs, and staff suggestions."}, {"ans": 2, "exp": "Implementing many improvements simultaneously without prioritization, owners, or deadlines diffuses resources and accountability \u2014 a managed backlog with clear ownership is essential."}, {"ans": 2, "exp": "Exceeding the target is a successful outcome \u2014 Act means locking in the improvement through standardization, training, and ongoing monitoring to prevent regression."}];
+var modId='m9';
+var answered=new Array(8).fill(false);
+var correct=new Array(8).fill(false);
+function pick(qi,chosen,ans){
+  if(answered[qi])return;
+  answered[qi]=true;
+  correct[qi]=(chosen===ans);
+  var opts=document.querySelectorAll('[name="qm9_'+qi+'"]');
+  opts.forEach(function(r){r.parentElement.style.pointerEvents='none';});
+  var cL=document.getElementById('Lm9_'+qi+'_'+chosen);
+  var aL=document.getElementById('Lm9_'+qi+'_'+ans);
+  if(chosen===ans){cL.classList.add('correct');}
+  else{cL.classList.add('wrong');aL.classList.add('show-ans');}
+  var fb=document.getElementById('FBm9_'+qi);
+  fb.className='feedback show '+(chosen===ans?'ok':'bad');
+  fb.innerHTML=(chosen===ans?'&#9989; Correct! ':'&#10060; Incorrect. ')+QS[qi].exp;
+  updateProg();
+}
+function updateProg(){
+  var done=answered.filter(Boolean).length;
+  document.getElementById('PLbl').textContent=done+' / 8 answered';
+  document.getElementById('PFill').style.width=(done/8*100)+'%';
+  document.getElementById('SubBtn').disabled=(done<8);
+}
+function submitQuiz(){
+  var score=correct.filter(Boolean).length;
+  var pct=Math.round(score/8*100);
+  var box=document.getElementById('ScoreBox');
+  document.getElementById('ScoreNum').textContent=score+'/8';
+  var rl=document.getElementById('ResultLbl');
+  if(pct>=75){rl.className='result-lbl pass';rl.textContent='Passed — '+pct+'%';}
+  else{rl.className='result-lbl fail';rl.textContent='Needs Review — '+pct+'% (75% required)';}
+  box.className='score-box show';
+  box.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body></html>

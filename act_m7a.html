@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 7A — KPI Classification & SPC Signal Recognition | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:120px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.grey{background:#6c757d}.btn.grey:hover{background:#5a6268}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.drop-zone{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:80px;background:#f8fffe;margin-bottom:10px}
+.drop-zone h5{font-size:.78rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:7px 11px;font-size:.86rem;margin-bottom:6px}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;margin-bottom:10px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 7 | ACTIVITY A</div><h1>Activity 7A — KPI Classification & SPC Signal Recognition</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Classify quality metrics by type, match KPIs to their SMART characteristics, and interpret basic control chart signals.</div>
+
+<p class="section-title">Part 1 — Classify the Metric</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">For each metric, select whether it is a <strong>Leading</strong> (predictive, input-focused) or <strong>Lagging</strong> (outcome, results-focused) indicator:</p>
+<div id="metric-grid"></div>
+<button class="btn teal" onclick="checkMetrics()">Check Classifications</button>
+<div class="result" id="metric-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 2 — SMART KPI Evaluation</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Evaluate each KPI statement. Select the SMART criterion it violates (or "Fully SMART" if it meets all criteria):</p>
+<div id="smart-grid"></div>
+<button class="btn teal" onclick="checkSMART()">Check KPI Evaluation</button>
+<div class="result" id="smart-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 3 — Control Chart Signal Identification</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Read each SPC description and select the signal type it represents:</p>
+<div id="spc-grid"></div>
+<button class="btn teal" onclick="checkSPC()">Check SPC Signals</button>
+<div class="result" id="spc-result"></div>
+</div>
+
+<script>
+var metrics=[
+  {text:"Number of customer complaints received last month",ans:"Lagging"},
+  {text:"Percentage of SOPs reviewed on schedule",ans:"Leading"},
+  {text:"Defect rate per 1,000 units produced",ans:"Lagging"},
+  {text:"Number of preventive maintenance tasks completed on time",ans:"Leading"},
+  {text:"On-time delivery rate to customers",ans:"Lagging"},
+  {text:"Training completion rate for quality procedures",ans:"Leading"},
+];
+var smartKPIs=[
+  {kpi:"Improve quality.",violation:"Not Specific / Not Measurable / Not Time-bound",opts:["Fully SMART","Not Specific / Not Measurable / Not Time-bound","Not Achievable","Not Relevant"]},
+  {kpi:"Reduce customer complaints by 20% within 6 months by implementing a complaint tracking system.",violation:"Fully SMART",opts:["Fully SMART","Not Specific","Not Measurable","Not Time-bound"]},
+  {kpi:"Reduce defect rate to 0.00% by next quarter.",violation:"Not Achievable",opts:["Fully SMART","Not Specific","Not Achievable","Not Relevant"]},
+  {kpi:"Ensure all audits are done.",violation:"Not Measurable / Not Time-bound",opts:["Fully SMART","Not Measurable / Not Time-bound","Not Specific","Not Relevant"]},
+];
+var spcSignals=[
+  {desc:"A single data point falls beyond the Upper Control Limit (UCL).",ans:"Special Cause Variation — Out of Control Signal",opts:["Normal Variation (Common Cause)","Special Cause Variation — Out of Control Signal","Process Shift","Trend Signal"]},
+  {desc:"Eight consecutive data points all fall on the same side of the centerline.",ans:"Process Shift — Nelson Rule Violation",opts:["Normal Variation (Common Cause)","Special Cause Variation — Out of Control Signal","Process Shift — Nelson Rule Violation","Random Noise"]},
+  {desc:"Points fluctuate randomly within the control limits with no discernible pattern.",ans:"Normal Variation (Common Cause)",opts:["Normal Variation (Common Cause)","Special Cause Variation — Out of Control Signal","Process Shift — Nelson Rule Violation","Trend Signal"]},
+  {desc:"Six consecutive points steadily increasing in one direction.",ans:"Trend Signal",opts:["Normal Variation (Common Cause)","Special Cause Variation — Out of Control Signal","Process Shift — Nelson Rule Violation","Trend Signal"]},
+];
+
+var mg=document.getElementById("metric-grid");
+metrics.forEach(function(m,i){
+  mg.innerHTML+='<div class="match-item"><span>'+m.text+'</span>'
+    +'<select id="met'+i+'"><option value="">Select type...</option>'
+    +'<option>Leading</option><option>Lagging</option></select></div>';
+});
+function checkMetrics(){
+  var correct=0;
+  metrics.forEach(function(m,i){if(document.getElementById("met"+i).value===m.ans)correct++;});
+  var r=document.getElementById("metric-result");
+  r.innerHTML=correct+"/6 correct. Remember: Leading = predictive inputs (training, maintenance), Lagging = outcome results (complaints, defect rates).";
+  r.className="result show"+(correct<4?" wrong":"");
+}
+
+var sg=document.getElementById("smart-grid");
+smartKPIs.forEach(function(k,i){
+  var opts=k.opts.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join("");
+  sg.innerHTML+='<div class="match-item"><em>'+k.kpi+'</em><select id="sm'+i+'"><option value="">Select evaluation...</option>'+opts+'</select></div>';
+});
+function checkSMART(){
+  var correct=0;
+  smartKPIs.forEach(function(k,i){if(document.getElementById("sm"+i).value===k.violation)correct++;});
+  var r=document.getElementById("smart-result");
+  r.innerHTML=correct+"/4 correct. KPI 1: Not SMART. KPI 2: Fully SMART. KPI 3: Not Achievable (0% defect rate is unrealistic). KPI 4: Not Measurable / Not Time-bound.";
+  r.className="result show"+(correct<3?" wrong":"");
+}
+
+var spg=document.getElementById("spc-grid");
+spcSignals.forEach(function(s,i){
+  var opts=s.opts.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join("");
+  spg.innerHTML+='<div class="match-item"><span>'+s.desc+'</span><select id="spc'+i+'"><option value="">Select signal type...</option>'+opts+'</select></div>';
+});
+function checkSPC(){
+  var correct=0;
+  spcSignals.forEach(function(s,i){if(document.getElementById("spc"+i).value===s.ans)correct++;});
+  var r=document.getElementById("spc-result");
+  r.innerHTML=correct+"/4 correct. Signal 1: Special Cause (UCL breach). Signal 2: Process Shift (8 consecutive points one side). Signal 3: Normal Variation. Signal 4: Trend Signal (6 consecutive rising points).";
+  r.className="result show"+(correct<3?" wrong":"");
+}
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

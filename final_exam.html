@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Final Certification Exam | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0a1628;color:#e8edf4;min-height:100vh}
+header{background:#003366;border-bottom:3px solid #00827F;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+header .logo{display:flex;align-items:center;gap:12px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1rem;font-weight:600;color:#fff}
+.timer-box{display:flex;align-items:center;gap:8px;background:#1a2d4a;border:2px solid #00827F;border-radius:10px;padding:10px 18px}
+.timer-label{font-size:.75rem;color:#8aa4c0;text-transform:uppercase;letter-spacing:.5px}
+.timer-val{font-size:1.6rem;font-weight:700;color:#00e5d4;font-variant-numeric:tabular-nums;line-height:1}
+.timer-box.warn{border-color:#f59e0b}.timer-box.warn .timer-val{color:#fbbf24}
+.timer-box.danger{border-color:#ef4444}.timer-box.danger .timer-val{color:#f87171}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 65px)}
+.nav-panel{background:#0f1f35;border-right:1px solid #1e3554;padding:16px;overflow-y:auto;max-height:calc(100vh - 65px);position:sticky;top:0}
+.nav-panel h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.6px;color:#5a7a9a;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #1e3554}
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:16px}
+.nav-btn{width:100%;aspect-ratio:1;border:2px solid #1e3554;border-radius:6px;background:transparent;color:#8aa4c0;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.nav-btn:hover{border-color:#00827F;color:#00e5d4}
+.nav-btn.answered{background:#00827F;border-color:#00827F;color:#fff}
+.nav-btn.current{border-color:#00e5d4;color:#00e5d4}
+.nav-section{font-size:.7rem;color:#5a7a9a;margin:10px 0 4px;text-transform:uppercase;letter-spacing:.4px}
+.main-panel{padding:32px;max-width:800px}
+.progress-wrap{margin-bottom:24px}
+.progress-bar-outer{height:6px;background:#1e3554;border-radius:3px;overflow:hidden;margin-top:6px}
+.progress-bar-inner{height:100%;background:#00827F;border-radius:3px;transition:width .3s}
+.progress-label{display:flex;justify-content:space-between;font-size:.8rem;color:#5a7a9a}
+.q-card{background:#0f1f35;border:1px solid #1e3554;border-radius:14px;padding:28px;margin-bottom:20px}
+.q-module{font-size:.73rem;font-weight:700;color:#00827F;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.q-num{font-size:.8rem;color:#5a7a9a;margin-bottom:10px}
+.q-text{font-size:1rem;font-weight:600;line-height:1.55;color:#e8edf4;margin-bottom:20px}
+.option-list{list-style:none}
+.option-list li{margin-bottom:10px}
+.option-list label{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border:2px solid #1e3554;border-radius:10px;cursor:pointer;transition:all .2s;font-size:.93rem;line-height:1.45;color:#c8d8e8}
+.option-list label:hover{border-color:#00827F;background:#0a2540}
+.option-list input[type=radio]{accent-color:#00827F;flex-shrink:0;margin-top:3px;width:16px;height:16px}
+.option-list label.selected{border-color:#00827F;background:#0a3040;color:#fff}
+.nav-actions{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.btn{border:none;padding:11px 22px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-prev{background:#1e3554;color:#8aa4c0}.btn-prev:hover{background:#2a4570;color:#fff}
+.btn-next{background:#003366;color:#fff}.btn-next:hover{background:#004a8f}
+.btn-submit{background:#00827F;color:#fff;padding:13px 28px;font-size:1rem}.btn-submit:hover{background:#006b68}
+.btn-submit:disabled{background:#1e3554;color:#5a7a9a;cursor:not-allowed}
+.results-screen{display:none;background:#0f1f35;border-radius:16px;padding:40px;text-align:center;margin:40px auto;max-width:600px}
+.results-screen.show{display:block}
+.score-ring{width:160px;height:160px;margin:0 auto 24px;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.2rem;font-weight:700;color:#00e5d4;line-height:1}
+.score-ring .score-sub{font-size:.75rem;color:#5a7a9a;margin-top:4px}
+.result-verdict{font-size:1.4rem;font-weight:700;margin:16px 0 8px}
+.pass-v{color:#4ade80}.fail-v{color:#f87171}
+.result-detail{font-size:.9rem;color:#8aa4c0;margin-bottom:24px}
+.result-review{background:#1e3554;border-radius:10px;padding:16px;margin-top:20px;text-align:left;max-height:400px;overflow-y:auto}
+.review-item{padding:10px 0;border-bottom:1px solid #2a4570;font-size:.85rem;line-height:1.5}
+.review-item:last-child{border-bottom:none}
+.review-item .rq{color:#c8d8e8;margin-bottom:4px}
+.review-item .ra.correct{color:#4ade80}.review-item .ra.wrong{color:#f87171}
+.review-item .rexp{color:#8aa4c0;font-size:.82rem;margin-top:4px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.nav-panel{display:none}.main-panel{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="badge">FINAL EXAM</div>
+    <h1>QA Foundations for a Modern Business &mdash; Certification Exam</h1>
+  </div>
+  <div class="timer-box" id="timerBox">
+    <div><div class="timer-label">Time Remaining</div><div class="timer-val" id="timerVal">90:00</div></div>
+  </div>
+</header>
+<div class="layout">
+  <div class="nav-panel">
+    <h3>Question Navigator</h3>
+    <div id="navGrid" class="nav-grid"></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid #1e3554">
+      <div style="display:flex;align-items:center;gap:6px;font-size:.75rem;color:#5a7a9a;margin-bottom:6px">
+        <span style="width:12px;height:12px;background:#00827F;border-radius:2px;display:inline-block"></span>Answered
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.75rem;color:#5a7a9a">
+        <span style="width:12px;height:12px;border:2px solid #1e3554;border-radius:2px;display:inline-block"></span>Unanswered
+      </div>
+    </div>
+    <button class="btn btn-submit" id="submitNavBtn" style="width:100%;margin-top:16px;justify-content:center" onclick="confirmSubmit()">Submit Exam</button>
+  </div>
+  <div class="main-panel" id="mainPanel">
+    <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.82rem;font-weight:600;margin-bottom:20px">&#8592; Back to Course Hub</a>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="progText">Question 1 of 60</span>
+        <span id="answeredText">0 of 60 answered</span>
+      </div>
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:0%"></div></div>
+    </div>
+    <div id="qContainer"></div>
+    <div class="nav-actions">
+      <button class="btn btn-prev" id="prevBtn" onclick="goTo(current-1)" disabled>&#8592; Previous</button>
+      <button class="btn btn-next" id="nextBtn" onclick="goTo(current+1)">Next &#8594;</button>
+    </div>
+    <div class="results-screen" id="resultsScreen">
+      <div class="score-ring">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="70" fill="none" stroke="#1e3554" stroke-width="12"/>
+          <circle cx="80" cy="80" r="70" fill="none" stroke="#00827F" stroke-width="12"
+            stroke-dasharray="439.82" stroke-dashoffset="439.82" id="scoreCircle" style="transition:stroke-dashoffset 1s ease"/>
+        </svg>
+        <div class="score-text" id="scorePct">0%</div>
+      </div>
+      <div class="result-verdict" id="resultVerdict"></div>
+      <div class="result-detail" id="resultDetail"></div>
+      <button class="btn btn-submit" onclick="window.location.href='../index.html'" style="margin:0 auto">&#8592; Return to Course Hub</button>
+      <div class="result-review" id="resultReview"></div>
+    </div>
+  </div>
+</div>
+<script>
+var QS = [{"id": "FE01", "text": "QA is primarily focused on which of the following?", "opts": ["Inspecting finished products", "Preventing defects through systematic process management", "Tracking warranty claims", "Measuring output volume"], "ans": 1, "exp": "QA is preventive and process-focused, designed to stop defects before they occur."}, {"id": "FE02", "text": "Which of the following most accurately describes Quality Control?", "opts": ["Building SOPs that define how tasks should be performed", "Conducting management reviews of the QMS", "Inspecting outputs to detect defects after they occur", "Training staff on quality procedures before work begins"], "ans": 2, "exp": "QC is reactive and product-focused \u2014 it detects defects in outputs that have already been produced.X15"}, {"id": "FE03", "text": "Which role is responsible for providing independent evaluations of QMS compliance?", "opts": ["Quality Control Inspector", "Process Owner", "Customer Service Manager", "Internal Auditor"], "ans": 3, "exp": "Internal auditors provide independent, evidence-based evaluations of compliance and identify improvement opportunities.X16"}, {"id": "FE05", "text": "What is the primary business benefit of reducing rework through effective QA?", "opts": ["It eliminates the need for Quality Control inspections", "It directly reduces operational costs and improves process efficiency", "It replaces the need for customer satisfaction surveys", "It guarantees zero defects in all products and services"], "ans": 1, "exp": "Reduced rework means fewer resources wasted on correction, directly lowering the cost of poor quality and improving operational efficiency."}, {"id": "FE07", "text": "A QMS is designed to ensure which of the following?", "opts": ["All employees are personally responsible for product defects", "Consistent operations aligned with organizational goals and customer requirements", "Products are inspected at every process step", "External certification is achieved within one year"], "ans": 1, "exp": "A QMS ensures consistent, repeatable processes that align with organizational objectives and customer expectations. X14"}, {"id": "FE08", "text": "Which document type provides objective evidence of past quality activities?", "opts": ["Quality policy", "Process map", "Record", "Corrective action plan"], "ans": 2, "exp": "Records are the documented proof that quality activities were performed \u2014 the primary form of audit evidence.X24"}, {"id": "FE09", "text": "A process map is most useful for which of the following?", "opts": ["Replacing SOPs with visual workflow diagrams", "Visualizing workflow to identify ownership gaps, redundancies, and improvement opportunities", "Recording the results of quality inspections", "Establishing the organizational chart for the quality department"], "ans": 1, "exp": "Process maps make workflows visible, enabling systematic identification of gaps, waste, and accountability issues.X22"}, {"id": "FE10", "text": "The \"Process Approach\" principle of a QMS means:", "opts": ["All quality activities must be performed by the quality department", "Processes are managed in isolation to prevent cross-departmental interference", "Organizational activities are treated as interrelated processes managed together to achieve desired outcomes", "Every process must be mapped before an SOP can be written"], "ans": 2, "exp": "The process approach views the organization as a system of interconnected processes whose combined management produces consistent, intended results.X29"}, {"id": "FE13", "text": "ISO 9001 primarily emphasizes which of the following?", "opts": ["Product specification and physical measurement standards", "Process control and systematic management of quality", "Financial reporting standards for quality departments", "Product design and engineering specifications"], "ans": 1, "exp": "ISO 9001 is built on the process approach \u2014 managing interrelated processes systematically to achieve consistent, intended outcomes. X2"}, {"id": "FE14", "text": "Regulatory compliance primarily ensures that an organization:", "opts": ["Achieves top-quartile performance in all industry metrics", "Meets applicable legal and regulatory requirements protecting stakeholders", "Eliminates all nonconformances identified in internal audits", "Maintains ISO 9001 certification status at all times"], "ans": 1, "exp": "Regulatory compliance is the mandatory baseline of meeting applicable legal and regulatory requirements designed to protect customers, employees, and the public.X32"}, {"id": "FE15", "text": "What does the \"Context of the Organization\" clause of ISO 9001 require?", "opts": ["That the organization defines its internal processes only", "That the organization understands internal capabilities and external factors affecting its ability to meet objectives", "That the organization achieves a specific market share threshold", "That the organization publishes its quality policy publicly"], "ans": 1, "exp": "Context of the Organization requires understanding both internal factors (capabilities, culture, resources) and external factors (market conditions, regulatory environment, stakeholder needs).X35"}, {"id": "FE16", "text": "Which of the following is a key activity of maintaining regulatory compliance?", "opts": ["Outsourcing all compliance decisions to an external law firm", "Monitoring applicable laws, updating procedures, and training staff on current requirements", "Conducting customer satisfaction surveys quarterly", "Achieving ISO 9001 certification as a permanent compliance solution"], "ans": 1, "exp": "Active compliance requires ongoing monitoring of regulatory changes, updating procedures accordingly, and ensuring staff are trained on current requirements.X36"}, {"id": "FE19", "text": "An SOP defines which of the following?", "opts": ["The financial budget for process operations", "How tasks are performed to ensure consistency and compliance", "The organizational chart for the department", "The strategic goals of the quality management system"], "ans": 1, "exp": "An SOP defines the step-by-step manner in which specific tasks must be performed to ensure consistency, safety, and compliance.X40"}, {"id": "FE20", "text": "Document control includes which of the following as a core practice?", "opts": ["Versioning to track changes and prevent use of outdated documents", "Publishing all documents publicly for maximum transparency", "Revising documents annually regardless of whether changes are needed", "Allowing any employee to update documents without formal approval"], "ans": 0, "exp": "Version management is a cornerstone of document control, ensuring that changes are tracked, revision history is maintained, and only current approved versions are in use.X43"}, {"id": "FE21", "text": "Records are primarily used to:", "opts": ["Define how processes should be performed in the future", "Provide objective evidence that required activities were completed", "Replace the need for SOPs once processes are established", "Communicate quality policy to customers"], "ans": 1, "exp": "Records are the documented proof that activities occurred \u2014 they provide the objective evidence that auditors and regulators require to confirm compliance.X42"}, {"id": "FE22", "text": "The three integrity requirements for quality records are:", "opts": ["Formatted, Filed, and Findable", "Accurate, Complete, and Secure", "Signed, Dated, and Submitted", "Digital, Backed-up, and Encrypted"], "ans": 1, "exp": "Quality records must be Accurate (reflecting what actually happened), Complete (containing all required information), and Secure (protected from loss or unauthorized alteration).X28"}, {"id": "FE25", "text": "A risk matrix evaluates which two factors to determine risk priority?", "opts": ["Cost and time", "Probability and impact", "Frequency and cost", "Severity and detectability only"], "ans": 1, "exp": "The risk matrix evaluates both probability (how likely is the risk to occur) and impact (how severe the consequences would be) to produce a combined risk priority score."}, {"id": "FE26", "text": "Preventive controls are defined as controls that:", "opts": ["Detect failures when they occur", "Stop issues before they occur", "Address the root cause after a failure", "Monitor risk register status quarterly"], "ans": 1, "exp": "Preventive controls stop risk events from materializing \u2014 they are the most cost-effective type of control because they eliminate the cost of managing failures.X20"}, {"id": "FE27", "text": "A risk register is used to:", "opts": ["Document customer complaints and resolutions", "Document identified risks, their assessment scores, controls, and owners", "Record the results of product inspections", "Track employee training completion status"], "ans": 1, "exp": "The risk register is the central living document that captures all identified risks with their probability and impact scores, assigned controls, responsible owners, and current status.X31"}, {"id": "FE28", "text": "Controls must be monitored over time primarily because:", "opts": ["Auditors require monthly control effectiveness reports", "Risk profiles change and control effectiveness can degrade, requiring updates", "ISO 9001 mandates annual control replacement", "Controls are only effective during the first 6 months of implementation"], "ans": 1, "exp": "Risk environments evolve and controls can become less effective over time \u2014 regular monitoring ensures controls remain relevant and functional as conditions change.X60"}, {"id": "FE31", "text": "CAPA addresses which of the following?", "opts": ["Root causes of both existing and potential problems", "Product inspections at the end of the production line", "Customer satisfaction measurement methodologies", "Financial auditing of quality program costs"], "ans": 0, "exp": "CAPA addresses root causes: corrective actions eliminate causes of problems that have occurred; preventive actions address causes of problems that could occur.X21"}, {"id": "FE32", "text": "The Fishbone Diagram is used as a tool for:", "opts": ["Plotting process measurements on a control chart", "Root cause analysis by categorizing potential causes of a problem", "Mapping process workflows to identify ownership gaps", "Calculating the risk score for entries in the risk register"], "ans": 1, "exp": "The Fishbone (Ishikawa) Diagram organizes potential causes of a problem into categories (People, Process, Machine, Material, Environment, Method) for systematic root cause analysis.X34"}, {"id": "FE33", "text": "CAPA verification ensures which of the following?", "opts": ["The CAPA report has been formatted correctly", "The corrective action was effective in eliminating the root cause", "All staff in the affected department were retrained", "The audit finding has been communicated to external customers"], "ans": 1, "exp": "Verification is the post-implementation stage where data is collected to confirm that the corrective action actually eliminated the root cause and prevented recurrence.X59"}, {"id": "FE34", "text": "RCA identifies which of the following?", "opts": ["The cost of implementing corrective actions", "The true underlying causes of a problem, not merely its symptoms", "The probability and impact of future risks", "The most cost-effective control for a given risk"], "ans": 1, "exp": "Root Cause Analysis traces a problem from its symptoms back to its true underlying cause \u2014 the cause that, if eliminated, prevents recurrence. X4"}, {"id": "FE37", "text": "Which metric directly measures the percentage of units containing defects?", "opts": ["First-pass yield", "Defect rate", "Cycle time", "On-time delivery rate"], "ans": 1, "exp": "Defect rate measures the percentage of total outputs that contain one or more defects \u2014 a fundamental process capability indicator.X44"}, {"id": "FE38", "text": "SPC is used to monitor which of the following?", "opts": ["Employee attendance and overtime hours", "Process variation over time to distinguish normal from abnormal behavior", "Customer satisfaction scores per delivery", "Budget expenditures against the quality department's annual plan"], "ans": 1, "exp": "SPC uses control charts to monitor process measurements over time, distinguishing common-cause variation (expected) from special-cause variation (abnormal, requiring investigation).X58"}, {"id": "FE39", "text": "KPIs must be aligned with which of the following to be truly effective?", "opts": ["The personal preferences of the quality manager", "Industry average benchmarks regardless of organizational context", "Organizational objectives and strategic goals", "The minimum reporting requirements of ISO 9001"], "ans": 2, "exp": "KPIs must be aligned with organizational objectives \u2014 measuring what matters to the business's ability to achieve its strategic goals. X3"}, {"id": "FE40", "text": "Control charts help identify which of the following?", "opts": ["Root causes of product defects", "Special-cause variation that signals the process is behaving abnormally", "The identity of employees responsible for quality errors", "The cost of poor quality in a given production period"], "ans": 1, "exp": "Control charts visually distinguish common-cause (normal) variation from special-cause (abnormal) variation \u2014 signals that require investigation and corrective action.X57"}, {"id": "FE43", "text": "Audit sampling should be which of the following?", "opts": ["Random \u2014 to ensure statistical validity across all records", "Risk-based \u2014 focused on higher-risk processes to maximize audit value", "Total \u2014 all records in scope must be reviewed for completeness", "Time-limited \u2014 only the most recent 30 days of records should be sampled"], "ans": 1, "exp": "Risk-based sampling focuses audit effort on the highest-risk areas, ensuring limited audit time delivers maximum compliance and quality value. X33"}, {"id": "FE44", "text": "An NCR (Nonconformance Report) must include which of the following?", "opts": ["An estimate of the financial cost of the nonconformance", "Objective evidence and the specific requirement that was violated", "A list of all employees present in the audited area", "The auditor's personal recommendation for the root cause"], "ans": 1, "exp": "An NCR must contain objective evidence of the deviation observed and the specific requirement (standard, SOP, regulation) that is not being met \u2014 these are non-negotiable elements. X12"}, {"id": "FE45", "text": "Internal audit purpose is primarily to:", "opts": ["Identify employees who are not following procedures for disciplinary action", "Verify compliance, identify gaps, and generate input for continuous improvement", "Replace the need for external certification audits", "Provide a public report on the organization's quality performance"], "ans": 1, "exp": "Internal audits verify that the QMS is functioning as designed, identify compliance gaps before external auditors find them, and generate improvement inputs for management review.X46"}, {"id": "FE46", "text": "Internal auditors must be which of the following to produce valid audit findings?", "opts": ["Members of the quality department", "Evidence-driven and independent of the areas they audit", "Certified by an external certification body", "Present in all audited departments during production shifts"], "ans": 1, "exp": "Internal auditors must be evidence-driven (findings based only on objective evidence) and independent of the areas they audit to avoid conflicts of interest that compromise objectivity."}, {"id": "FE49", "text": "A nonconformance report identifies which of the following?", "opts": ["An improvement opportunity that requires no formal action", "A requirement violation with supporting evidence and impact description", "A risk that has been assessed but not yet controlled", "A KPI that has missed its target threshold"], "ans": 1, "exp": "A nonconformance report formally records a failure to meet a specified requirement, supported by objective evidence and including an assessment of impact.X54"}, {"id": "FE50", "text": "PDCA supports which of the following?", "opts": ["One-time process redesign projects", "Continuous improvement through a structured, repeatable problem-solving cycle", "Financial performance benchmarking against competitors", "Annual quality management reviews only"], "ans": 1, "exp": "PDCA provides a structured, repeatable framework for continuous improvement \u2014 it is designed to be applied cyclically, not as a one-time fix.X53"}, {"id": "FE51", "text": "An improvement backlog should be which of the following?", "opts": ["Kept at a fixed length with no new items added after initial population", "Prioritized by impact, effort, and risk so that highest-value improvements are addressed first", "Limited to findings from external certification audits only", "Managed exclusively by the quality department without cross-functional involvement"], "ans": 1, "exp": "The improvement backlog must be actively prioritized to ensure limited resources are directed toward the improvements with the greatest quality and compliance impact.X51"}, {"id": "FE52", "text": "A major nonconformance indicates which of the following?", "opts": ["A single isolated deviation with no systemic implications", "A systemic failure that undermines confidence in the QMS", "A risk that has been identified but not yet assessed", "An opportunity for improvement that does not require formal CAPA"], "ans": 1, "exp": "A major nonconformance signals a systemic failure \u2014 affecting multiple instances or fundamental QMS elements \u2014 requiring urgent corrective action and formal CAPA.X52"}, {"id": "FE55", "text": "A QA roadmap helps an organization by:", "opts": ["Replacing the need for a formal QMS documentation system", "Guiding QA implementation with defined milestones, responsibilities, and timelines", "Eliminating the need for stakeholder engagement activities", "Automatically generating SOPs for each identified process"], "ans": 1, "exp": "The QA roadmap is the implementation navigation tool \u2014 aligning stakeholders, setting milestones, assigning responsibilities, and tracking progress toward a functioning QMS.X48"}, {"id": "FE56", "text": "Effective stakeholder engagement in a QA implementation requires which of the following?", "opts": ["Mandatory participation by all staff regardless of role relevance", "Clear, tailored communication and structured feedback mechanisms", "External consultants to deliver all QA communications", "Restricting quality information to the quality department only"], "ans": 1, "exp": "Effective engagement requires clear communication tailored to each stakeholder group, structured training, and two-way feedback to address concerns and build genuine commitment."}, {"id": "FE57", "text": "A QA rollout should begin with which of the following?", "opts": ["Immediate deployment to all departments simultaneously", "A pilot implementation in a controlled, limited scope to test and refine before scaling", "External certification audit to validate the system before internal deployment", "Full SOP rewrite for every process before any system is activated"], "ans": 1, "exp": "Piloting reduces implementation risk by testing processes, training materials, and systems in a real but limited environment before full-scale deployment.X41"}, {"id": "FE58", "text": "Sustaining a quality culture long-term requires which of the following?", "opts": ["Achieving certification and then maintaining the status quo", "Ongoing monitoring of metrics, continuous improvement cycles, and recognition of quality achievements", "Removing the improvement backlog once all initial items are addressed", "Reducing audit frequency once the QMS is established and stable"], "ans": 1, "exp": "Quality is never \"done\" \u2014 sustaining a culture requires permanent commitment to monitoring, continuous improvement, training, and recognition of quality behavior and results."}, {"id": "FE41", "text": "A control chart shows eight consecutive points all above the centerline but within control limits. This indicates:", "opts": ["Normal random variation requiring no action", "A process shift \u2014 a non-random pattern that warrants investigation", "A measurement system error", "The process is performing better than average"], "ans": 1, "exp": "Eight consecutive points on one side of the centerline is a Nelson Rule violation \u2014 a signal of special-cause variation even without UCL/LCL breaches."}, {"id": "FE42", "text": "Which metric measures the percentage of units that complete a process meeting all quality requirements on the first attempt?", "opts": ["Defect rate", "On-time delivery rate", "First Pass Yield (FPY)", "Cost of Poor Quality"], "ans": 2, "exp": "First Pass Yield (FPY) measures units passing all quality checks without rework or rejection on the first attempt \u2014 a key process effectiveness metric."}, {"id": "FE43", "text": "The primary purpose of an opening meeting at the start of an audit is to:", "opts": ["Present audit findings to management", "Confirm audit scope, logistics, and introduce the audit team to the auditee", "Train employees on audit requirements", "Collect initial documentary evidence"], "ans": 1, "exp": "The opening meeting confirms scope, plan, logistics, and communication channels \u2014 establishing shared understanding before evidence collection begins."}, {"id": "FE44", "text": "Audit evidence must be:", "opts": ["Subjective and based on auditor experience", "Sufficient, relevant, and verifiable \u2014 based on objective facts", "Collected only through document review", "Obtained exclusively from management interviews"], "ans": 1, "exp": "Audit evidence must be objective \u2014 sufficient (enough to support the conclusion), relevant (to the audit criteria), and verifiable (traceable to a source)."}, {"id": "FE45", "text": "Which of the following is NOT one of the three primary methods of collecting audit evidence?", "opts": ["Interviewing process participants", "Observing activities being performed", "Reviewing documented records", "Conducting financial ratio analysis"], "ans": 3, "exp": "The three primary audit evidence methods are interviews, observation, and records review. Financial ratio analysis is not an audit evidence collection method in quality management."}, {"id": "FE46", "text": "A 'major nonconformity' in an audit finding means:", "opts": ["A minor paperwork error with no operational impact", "A single isolated deviation that is unlikely to recur", "A systemic failure or complete absence of a required QMS element", "A suggestion for improvement when requirements are already met"], "ans": 2, "exp": "A major nonconformity indicates a systemic failure \u2014 a complete absence of a required element, or multiple failures indicating the QMS element is not functioning."}, {"id": "FE47", "text": "Risk-based audit sampling means:", "opts": ["Randomly selecting 10% of all records regardless of risk level", "Focusing sampling effort on processes and areas with higher risk or previous nonconformances", "Auditing only departments that requested a review", "Reviewing only the most recent records from the past 30 days"], "ans": 1, "exp": "Risk-based sampling directs limited audit time toward higher-risk processes, maximizing the audit's value and likelihood of finding meaningful nonconformances."}, {"id": "FE48", "text": "An 'Opportunity for Improvement' (OFI) issued in an audit report means:", "opts": ["A mandatory corrective action must be issued", "A requirement is not being met and a nonconformance must be raised", "Requirements are met but practice could be enhanced \u2014 action is not mandatory", "The audit was inconclusive and must be repeated"], "ans": 2, "exp": "OFIs identify areas where requirements are satisfied but further improvement could be made \u2014 they are not mandatory to action but represent valuable quality intelligence."}, {"id": "FE49", "text": "The 'Check' phase of the PDCA cycle involves:", "opts": ["Identifying the problem and setting goals", "Implementing the planned improvement", "Collecting data to evaluate whether the improvement achieved the planned objective", "Standardizing the improvement into procedures and training"], "ans": 2, "exp": "The Check phase evaluates results against the planned objectives using data \u2014 it determines whether the Do phase actually worked before any standardization occurs."}, {"id": "FE50", "text": "A nonconformance is defined as:", "opts": ["Any situation that reduces employee morale", "A failure to meet a specified requirement", "An improvement suggestion from a team member", "A customer complaint that has been resolved"], "ans": 1, "exp": "A nonconformance is any failure to meet a specified requirement \u2014 product, process, or system \u2014 that must be formally documented and addressed."}, {"id": "FE51", "text": "An improvement backlog should be prioritized based on:", "opts": ["Alphabetical order of process names", "The personal preference of the quality manager", "Impact on quality outcomes, effort required, and risk of deferring action", "The order in which improvement items were first identified"], "ans": 2, "exp": "Backlog prioritization must balance potential impact, implementation effort, and the compliance/safety risk of delay \u2014 ensuring critical improvements receive earliest attention."}, {"id": "FE52", "text": "The 'Act' phase of PDCA, when the improvement was effective, involves:", "opts": ["Returning to Plan with new data if results were insufficient", "Closing the project and archiving all notes", "Standardizing the solution into procedures, training staff, and identifying replication opportunities", "Removing the improvement trial and restoring original conditions"], "ans": 2, "exp": "When effective, Act locks in the gain: standardize into SOPs, train all affected staff, communicate lessons learned, and identify where the improvement can be replicated."}, {"id": "FE53", "text": "Which of the following is a valid input source for an improvement backlog?", "opts": ["Social media mentions of the organization", "Internal audit findings, customer complaints, KPI trend data, and staff suggestions", "Annual shareholder report", "Competitor pricing analysis"], "ans": 1, "exp": "Improvement backlogs draw from all quality data sources \u2014 audit findings, complaints, KPI trends, OFIs, management review outputs, and staff suggestions."}, {"id": "FE54", "text": "A 'recurring nonconformance' is one that:", "opts": ["Occurs only during external audits", "Has been formally documented with a corrective action and then reappears after the CAPA was closed", "Involves a supplier rather than an internal process", "Is classified as minor in severity"], "ans": 1, "exp": "A recurring nonconformance reappears after a CAPA was supposedly closed \u2014 a strong indicator that the root cause was not correctly identified or eliminated."}, {"id": "FE55", "text": "A QA Roadmap should begin with:", "opts": ["Immediately implementing all ISO 9001 requirements simultaneously", "Writing SOPs before understanding the current state", "A current-state assessment to understand where the organization is before defining where it needs to go", "Scheduling the external certification audit as the first action"], "ans": 2, "exp": "A roadmap must start with a current-state assessment \u2014 you cannot plan a meaningful improvement journey without understanding the baseline gap."}, {"id": "FE56", "text": "Stakeholder management in a QA implementation means:", "opts": ["Only involving the quality department in QA decisions", "Identifying all individuals and groups affected by the QA implementation and engaging them appropriately", "Keeping all QA plans confidential until implementation is complete", "Delegating all communication to an external consultant"], "ans": 1, "exp": "Effective stakeholder management identifies all parties with interest in or influence over the QA implementation and ensures they are appropriately informed, involved, and engaged."}, {"id": "FE57", "text": "A pilot rollout is recommended for QA implementation because:", "opts": ["It allows the quality team to avoid full organizational commitment", "It tests the QA approach in a limited scope, identifying issues before they affect the entire organization", "It is required by ISO 9001 before full deployment", "It eliminates the need for staff training"], "ans": 1, "exp": "A pilot rollout reduces risk by validating the QA approach on a smaller scale \u2014 allowing corrections before investing in full organizational deployment."}, {"id": "FE58", "text": "The most common cause of failed QA implementations is:", "opts": ["Using too many quality tools simultaneously", "Lack of visible leadership commitment and active management sponsorship", "Having too many quality professionals involved", "Implementing ISO 9001 requirements in the wrong order"], "ans": 1, "exp": "Research consistently shows that lack of visible leadership commitment is the primary reason QA implementations fail \u2014 without active sponsorship, resistance grows and resources dry up."}, {"id": "FE59", "text": "Sustaining a QA culture after initial rollout requires:", "opts": ["Disbanding the quality team once certification is achieved", "Completing one final audit to confirm the system is working", "Ongoing monitoring, continuous improvement cycles, updated training, and organizational recognition of quality behaviors", "Reducing quality investment once defect rates decline"], "ans": 2, "exp": "QA is not a project with a finish line \u2014 sustaining it requires continuous monitoring, improvement cycles, training updates, and a culture that rewards quality behaviors."}, {"id": "FE60", "text": "Cost of Quality (COQ) includes which of the following categories?", "opts": ["Prevention costs, appraisal costs, and failure costs (internal and external)", "Labor costs, material costs, and overhead costs", "Marketing costs, sales costs, and customer acquisition costs", "Training costs only"], "ans": 0, "exp": "COQ encompasses: Prevention (avoiding defects), Appraisal (inspecting/testing), Internal Failure (defects found before delivery), and External Failure (defects reaching the customer)."}];
+var MODS = ["Module 1 \u2014 QA Fundamentals", "Module 1 \u2014 QA Fundamentals", "Module 1 \u2014 QA Fundamentals", "Module 1 \u2014 QA Fundamentals", "Module 1 \u2014 QA Fundamentals", "Module 1 \u2014 QA Fundamentals", "Module 2 \u2014 Quality Management Systems", "Module 2 \u2014 Quality Management Systems", "Module 2 \u2014 Quality Management Systems", "Module 2 \u2014 Quality Management Systems", "Module 2 \u2014 Quality Management Systems", "Module 2 \u2014 Quality Management Systems", "Module 3 \u2014 Standards & Regulatory", "Module 3 \u2014 Standards & Regulatory", "Module 3 \u2014 Standards & Regulatory", "Module 3 \u2014 Standards & Regulatory", "Module 3 \u2014 Standards & Regulatory", "Module 3 \u2014 Standards & Regulatory", "Module 4 \u2014 Documentation & SOPs", "Module 4 \u2014 Documentation & SOPs", "Module 4 \u2014 Documentation & SOPs", "Module 4 \u2014 Documentation & SOPs", "Module 4 \u2014 Documentation & SOPs", "Module 4 \u2014 Documentation & SOPs", "Module 5 \u2014 Risk Management", "Module 5 \u2014 Risk Management", "Module 5 \u2014 Risk Management", "Module 5 \u2014 Risk Management", "Module 5 \u2014 Risk Management", "Module 5 \u2014 Risk Management", "Module 6 \u2014 CAPA & Root Cause", "Module 6 \u2014 CAPA & Root Cause", "Module 6 \u2014 CAPA & Root Cause", "Module 6 \u2014 CAPA & Root Cause", "Module 6 \u2014 CAPA & Root Cause", "Module 6 \u2014 CAPA & Root Cause", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 7 \u2014 Metrics, KPIs & SPC", "Module 8 \u2014 Audit Readiness", "Module 8 \u2014 Audit Readiness", "Module 8 \u2014 Audit Readiness", "Module 8 \u2014 Audit Readiness", "Module 8 \u2014 Audit Readiness", "Module 8 \u2014 Audit Readiness", "Module 9 \u2014 Reporting & CI", "Module 9 \u2014 Reporting & CI", "Module 9 \u2014 Reporting & CI", "Module 9 \u2014 Reporting & CI", "Module 9 \u2014 Reporting & CI", "Module 9 \u2014 Reporting & CI", "Module 10 \u2014 Implementing QA", "Module 10 \u2014 Implementing QA", "Module 10 \u2014 Implementing QA", "Module 10 \u2014 Implementing QA", "Module 10 \u2014 Implementing QA", "Module 10 \u2014 Implementing QA"];
+var answers = new Array(60).fill(null);
+var current = 0;
+var timerSecs = 90 * 60;
+var timerInt = null;
+var submitted = false;
+
+// Build nav grid
+var ng = document.getElementById('navGrid');
+for (var i = 0; i < 60; i++) {
+  var btn = document.createElement('button');
+  btn.className = 'nav-btn';
+  btn.id = 'nb' + i;
+  btn.textContent = i + 1;
+  btn.dataset.q = i;
+  btn.onclick = (function(qi) { return function() { goTo(qi); }; })(i);
+  ng.appendChild(btn);
+}
+
+function goTo(qi) {
+  if (qi < 0 || qi >= 60 || submitted) return;
+  current = qi;
+  render();
+}
+
+function render() {
+  var q = QS[current];
+  var mod = MODS[current] || '';
+  var opts = q.opts.map(function(o, j) {
+    var letters = ['A','B','C','D'];
+    var sel = answers[current] === j ? ' selected' : '';
+    return '<li><label class="' + sel + '"><input type="radio" name="q' + current + '" value="' + j + '"' + (answers[current] === j ? ' checked' : '') + ' onchange="pick(' + current + ',' + j + ')">' + '<strong>' + letters[j] + '.</strong>&nbsp;' + o + '</label></li>';
+  }).join('');
+  document.getElementById('qContainer').innerHTML =
+    '<div class="q-card">' +
+    '<div class="q-module">' + mod + '</div>' +
+    '<div class="q-num">Question ' + (current+1) + ' of 60 &nbsp;&bull;&nbsp; ' + q.id + '</div>' +
+    '<div class="q-text">' + q.text + '</div>' +
+    '<ul class="option-list">' + opts + '</ul>' +
+    '</div>';
+  // Update nav
+  for (var i = 0; i < 60; i++) {
+    var nb = document.getElementById('nb' + i);
+    nb.className = 'nav-btn' + (answers[i] !== null ? ' answered' : '') + (i === current ? ' current' : '');
+  }
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === 59;
+  document.getElementById('progText').textContent = 'Question ' + (current+1) + ' of 60';
+  var answeredCount = answers.filter(function(a) { return a !== null; }).length;
+  document.getElementById('answeredText').textContent = answeredCount + ' of 60 answered';
+  document.getElementById('progBar').style.width = (answeredCount / 60 * 100) + '%';
+}
+
+function pick(qi, val) {
+  answers[qi] = val;
+  render();
+}
+
+// Timer
+function startTimer() {
+  timerInt = setInterval(function() {
+    timerSecs--;
+    var m = Math.floor(timerSecs / 60);
+    var s = timerSecs % 60;
+    var box = document.getElementById('timerBox');
+    document.getElementById('timerVal').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    if (timerSecs <= 600 && timerSecs > 300) box.className = 'timer-box warn';
+    if (timerSecs <= 300) box.className = 'timer-box danger';
+    if (timerSecs <= 0) { clearInterval(timerInt); submitExam(); }
+  }, 1000);
+}
+
+function confirmSubmit() {
+  var unanswered = answers.filter(function(a) { return a === null; }).length;
+  var msg = unanswered > 0 ? 'You have ' + unanswered + ' unanswered question(s). Submit anyway?' : 'Submit your exam? This cannot be undone.';
+  if (confirm(msg)) submitExam();
+}
+
+function submitExam() {
+  if (submitted) return;
+  submitted = true;
+  clearInterval(timerInt);
+  var correct = 0;
+  QS.forEach(function(q, i) { if (answers[i] === q.ans) correct++; });
+  var pct = Math.round(correct / 60 * 100);
+  var passed = pct >= 75;
+  document.getElementById('qContainer').style.display = 'none';
+  document.querySelector('.nav-actions').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  var rs = document.getElementById('resultsScreen');
+  rs.className = 'results-screen show';
+  document.getElementById('scorePct').innerHTML = pct + '%<div class="score-sub">' + correct + '/60</div>';
+  var circ = document.getElementById('scoreCircle');
+  circ.style.stroke = passed ? '#4ade80' : '#f87171';
+  setTimeout(function() { circ.style.strokeDashoffset = 439.82 * (1 - pct/100); }, 200);
+  var verd = document.getElementById('resultVerdict');
+  verd.className = 'result-verdict ' + (passed ? 'pass-v' : 'fail-v');
+  verd.textContent = passed ? '✅ PASSED — Certificate Earned!' : '❌ Not Passed — Review & Retry';
+  document.getElementById('resultDetail').textContent = correct + ' of 60 correct (' + pct + '%). ' + (passed ? 'You have met the 75% threshold. Your certificate of completion has been earned.' : 'A score of 75% (45/60) is required to pass. Review the modules below and retake when ready.');
+  var rev = document.getElementById('resultReview');
+  var html = '<h4 style="color:#5a7a9a;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Answer Review</h4>';
+  QS.forEach(function(q, i) {
+    var correct_ans = q.opts[q.ans];
+    var your_ans = answers[i] !== null ? q.opts[answers[i]] : 'Not answered';
+    var ok = answers[i] === q.ans;
+    html += '<div class="review-item"><div class="rq"><strong>' + q.id + ':</strong> ' + q.text + '</div>'
+      + '<div class="ra ' + (ok ? 'correct' : 'wrong') + '">' + (ok ? '✅' : '❌') + ' Your answer: ' + your_ans + '</div>'
+      + (!ok ? '<div class="ra correct">✅ Correct: ' + correct_ans + '</div>' : '')
+      + '<div class="rexp">💡 ' + q.exp + '</div></div>';
+  });
+  rev.innerHTML = html;
+  rs.scrollIntoView({behavior:'smooth'});
+}
+
+render();
+startTimer();
+</script>
+</body>
+</html>

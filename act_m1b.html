@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 1B — Role Identification Case Study | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 20px}
+.drag-col{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:140px;background:#f8fffe;transition:background .2s}
+.drag-col.over{background:#d4f5f2;border-color:#005f5d}
+.drag-col h4{font-size:.8rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.card-item.dragging{opacity:.4;transform:scale(.97)}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:8px 12px;font-size:.86rem;line-height:1.4;margin-bottom:6px;cursor:default}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:130px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.green{background:#28a745}.btn.green:hover{background:#218838}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.scenario-card strong{color:#003366}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;margin-bottom:8px;font-size:.91rem;line-height:1.4;cursor:pointer;transition:all .2s}
+.checklist-item:hover{border-color:#00827F;background:#f0faf9}
+.checklist-item input[type=checkbox]{accent-color:#00827F;flex-shrink:0;width:16px;height:16px;margin-top:2px}
+.checklist-item.checked{border-color:#28a745;background:#d4edda}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}.drag-area{grid-template-columns:1fr}.match-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 1 | ACTIVITY B</div><h1>Activity 1B — Role Identification Case Study</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Identify which QA role failed in a real-world scenario and explain what each role should have done to prevent the situation.</div>
+<div class="warn-box">&#128196; <strong>Submission Note:</strong> This is a written reflection activity. Type your response below. In a live course, your instructor will provide written feedback on your submission.</div>
+
+<p class="section-title">Scenario</p>
+<div class="scenario-card">
+  <p>A manufacturing company is preparing for its <strong>first external audit</strong>. The operations team is scrambling to locate current procedure documents. The production floor has been running an <strong>outdated SOP for three months</strong>, and <strong>customer complaints have risen 15%</strong> over the past quarter.</p>
+  <br>
+  <p>Senior leadership is unaware of the complaint trend. No internal audit has been conducted in over a year. When the external auditor arrives, the quality manager is unable to produce training records for six recently onboarded employees.</p>
+</div>
+
+<p class="section-title">Your Task</p>
+<div class="step"><span class="step-num">1</span><span>Identify which QA role(s) failed in this scenario: <strong>Process Owner</strong>, <strong>Quality Manager</strong>, or <strong>Internal Auditor</strong>.</span></div>
+<div class="step"><span class="step-num">2</span><span>For each failed role, explain specifically what they should have done to prevent this situation.</span></div>
+<div class="step"><span class="step-num">3</span><span>Your response should be <strong>200–300 words</strong>, written in clear, professional language.</span></div>
+
+<p class="section-title">Your Response</p>
+<textarea id="response" placeholder="Identify the failing roles and explain what each should have done differently..."></textarea>
+
+<div class="submit-area">
+  <button class="btn teal" onclick="submitResponse()">Submit Response</button>
+  <div class="result" id="sub-result" style="margin-top:14px"></div>
+</div>
+</div>
+
+<div class="card" style="background:#f8f9fa">
+  <p class="section-title">Model Answer Guidance</p>
+  <p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">After submitting, compare your response to the points below:</p>
+  <div id="model" style="display:none">
+    <div class="step"><span class="step-num">1</span><span><strong>Process Owner:</strong> Should have ensured the SOP on the production floor was the current approved version. Outdated documents indicate a failure to maintain controlled distribution and remove obsolete versions from use.</span></div>
+    <div class="step"><span class="step-num">2</span><span><strong>Quality Manager:</strong> Should have monitored the customer complaint trend through regular KPI review and escalated to leadership. Should also have ensured training records were maintained for all new employees and a management review cadence was in place.</span></div>
+    <div class="step"><span class="step-num">3</span><span><strong>Internal Auditor:</strong> Should have conducted internal audits at planned intervals, which would have identified the outdated SOP, missing records, and rising complaint trend before the external audit — giving the organization time to correct these gaps.</span></div>
+  </div>
+  <button class="btn" style="background:#6c757d;margin-top:10px" onclick="showModel()">Reveal Model Answer</button>
+</div>
+
+<script>
+function submitResponse(){
+  var r = document.getElementById("response").value.trim();
+  var res = document.getElementById("sub-result");
+  if(r.length < 80){ res.innerHTML="&#9888; Please write a more complete response before submitting."; res.className="result show wrong"; return; }
+  var wc = r.split(/\s+/).length;
+  res.innerHTML = "&#10003; Response recorded! Word count: ~"+wc+" words. Compare your answer to the Model Answer below.";
+  res.className = "result show";
+}
+function showModel(){ document.getElementById("model").style.display="block"; }
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 1A — QA vs. QC Sorting Exercise | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 20px}
+.drag-col{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:140px;background:#f8fffe;transition:background .2s}
+.drag-col.over{background:#d4f5f2;border-color:#005f5d}
+.drag-col h4{font-size:.8rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.card-item.dragging{opacity:.4;transform:scale(.97)}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:8px 12px;font-size:.86rem;line-height:1.4;margin-bottom:6px;cursor:default}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:130px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.green{background:#28a745}.btn.green:hover{background:#218838}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.scenario-card strong{color:#003366}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;margin-bottom:8px;font-size:.91rem;line-height:1.4;cursor:pointer;transition:all .2s}
+.checklist-item:hover{border-color:#00827F;background:#f0faf9}
+.checklist-item input[type=checkbox]{accent-color:#00827F;flex-shrink:0;width:16px;height:16px;margin-top:2px}
+.checklist-item.checked{border-color:#28a745;background:#d4edda}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}.drag-area{grid-template-columns:1fr}.match-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 1 | ACTIVITY A</div><h1>Activity 1A — QA vs. QC Sorting Exercise</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Distinguish between Quality Assurance and Quality Control activities using real workplace examples.</div>
+<p class="section-title">Instructions</p>
+<div class="step"><span class="step-num">1</span><span>Read each workplace activity card in the bank below.</span></div>
+<div class="step"><span class="step-num">2</span><span>Drag each card into the correct column: <strong>Quality Assurance</strong> or <strong>Quality Control</strong>.</span></div>
+<div class="step"><span class="step-num">3</span><span>When all cards are placed, click <strong>Check My Answers</strong> to see instant feedback.</span></div>
+
+<p class="section-title">Activity Cards</p>
+<div class="drag-bank" id="bank"></div>
+
+<div class="drag-area">
+  <div class="drag-col" id="col-qa" ondragover="allowDrop(event)" ondrop="drop(event,'qa')">
+    <h4>&#128736; Quality Assurance</h4>
+    <div id="qa-items"></div>
+  </div>
+  <div class="drag-col" id="col-qc" ondragover="allowDrop(event)" ondrop="drop(event,'qc')">
+    <h4>&#128269; Quality Control</h4>
+    <div id="qc-items"></div>
+  </div>
+</div>
+
+<button class="btn teal" onclick="checkSort()">Check My Answers</button>
+<button class="btn" style="margin-left:10px;background:#6c757d" onclick="resetSort()">Reset</button>
+<div class="result" id="sort-result"></div>
+</div>
+
+<script>
+var cards = [
+  {id:"c1", text:"Writing a new SOP for the packaging process", ans:"qa"},
+  {id:"c2", text:"Inspecting finished goods for dimensional defects", ans:"qc"},
+  {id:"c3", text:"Training staff on correct procedures before they begin work", ans:"qa"},
+  {id:"c4", text:"Sampling 10% of output from a production batch for defects", ans:"qc"},
+  {id:"c5", text:"Conducting a process capability study before launch", ans:"qa"},
+  {id:"c6", text:"Reviewing a finished product label for compliance", ans:"qc"},
+  {id:"c7", text:"Recalibrating filling machines before each shift begins", ans:"qa"},
+  {id:"c8", text:"Measuring thread pitch on fasteners after delivery", ans:"qc"},
+  {id:"c9", text:"Designing an audit checklist for the incoming inspection process", ans:"qa"},
+  {id:"c10", text:"Verifying that a completed service report meets spec before filing", ans:"qc"},
+];
+var placements = {};
+
+function init(){
+  var bank = document.getElementById("bank");
+  bank.innerHTML = "";
+  document.getElementById("qa-items").innerHTML = "";
+  document.getElementById("qc-items").innerHTML = "";
+  placements = {};
+  cards.forEach(function(c){
+    var el = document.createElement("div");
+    el.className = "card-item"; el.id = c.id;
+    el.draggable = true; el.textContent = c.text;
+    el.ondragstart = function(e){ e.dataTransfer.setData("id", c.id); el.classList.add("dragging"); };
+    el.ondragend = function(){ el.classList.remove("dragging"); };
+    bank.appendChild(el);
+  });
+}
+
+function allowDrop(e){ e.preventDefault(); e.currentTarget.classList.add("over"); }
+function drop(e, col){
+  e.preventDefault();
+  e.currentTarget.classList.remove("over");
+  var id = e.dataTransfer.getData("id");
+  var el = document.getElementById(id);
+  if(!el) return;
+  placements[id] = col;
+  var drop = document.createElement("div");
+  drop.className = "drop-item"; drop.textContent = el.textContent; drop.dataset.cid = id;
+  document.getElementById(col+"-items").appendChild(drop);
+  el.remove();
+}
+
+function checkSort(){
+  var correct = 0;
+  cards.forEach(function(c){ if(placements[c.id]===c.ans) correct++; });
+  var placed = Object.keys(placements).length;
+  if(placed < cards.length){
+    alert("Please place all "+cards.length+" cards before checking!"); return;
+  }
+  var pct = Math.round(correct/cards.length*100);
+  var res = document.getElementById("sort-result");
+  var msg = correct+"/"+cards.length+" correct ("+pct+"%). ";
+  if(pct===100) msg += "&#127881; Perfect score! All activities correctly classified.";
+  else msg += "Review: QA = preventive/process-focused; QC = reactive/product-inspection. Try again!";
+  res.innerHTML = msg;
+  res.className = "result show " + (pct>=80?"":"wrong");
+}
+function resetSort(){ init(); document.getElementById("sort-result").className="result"; }
+init();
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module 4 — Documentation & SOPs | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0;transition:color .2s}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.obj-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px;font-size:.91rem;line-height:1.6}
+.progress-wrap{margin-bottom:24px}
+.progress-label{display:flex;justify-content:space-between;font-size:.82rem;color:#5a6a7e;margin-bottom:6px}
+.progress-bar{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:#00827F;border-radius:3px;transition:width .4s}
+.q-block{margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid #f0f4f8}
+.q-block:last-of-type{border-bottom:none}
+.scenario-tag{display:inline-block;background:#fff3cd;color:#856404;font-size:.73rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:8px;border:1px solid #ffc107}
+.q-num{color:#00827F;font-size:.8rem;font-weight:700;margin-bottom:6px;letter-spacing:.5px}
+.q-text{font-weight:600;margin-bottom:14px;line-height:1.55;font-size:.96rem}
+.options label{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;margin-bottom:8px;transition:all .2s;font-size:.92rem;line-height:1.4;user-select:none}
+.options label:hover{border-color:#00827F;background:#f0faf9}
+.options input[type=radio]{margin-top:2px;accent-color:#00827F;flex-shrink:0}
+.options label.correct{border-color:#28a745!important;background:#d4edda!important}
+.options label.wrong{border-color:#dc3545!important;background:#fdf0f0!important}
+.options label.show-ans{border-color:#28a745!important;background:#d4edda!important}
+.feedback{display:none;margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.88rem;line-height:1.5}
+.feedback.show{display:block}
+.feedback.ok{background:#d4edda;border:1px solid #c3e6cb;color:#155724}
+.feedback.bad{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:13px 28px;border-radius:8px;font-size:.97rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:4px}
+.btn:hover{background:#004a8f}.btn:disabled{background:#9aacbf;cursor:not-allowed}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.score-box{display:none;background:#003366;color:#fff;border-radius:12px;padding:32px;text-align:center;margin-top:24px}
+.score-box.show{display:block}
+.score-big{font-size:3rem;font-weight:700;color:#00e5d4}
+.score-lbl{margin-top:8px;font-size:1rem;opacity:.9}
+.result-lbl{font-weight:700;font-size:1.2rem;margin-top:14px}
+.pass{color:#7fffd4}.fail{color:#ff8fa3}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 4 QUIZ</div><h1>Module 4 — Documentation & SOPs</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+<div class="card">
+<div class="obj-box">&#127919; <strong>Quiz Objective:</strong> Covers SOP structure, document control lifecycle, records vs. documents, and audit readiness.</div>
+<div class="progress-wrap">
+  <div class="progress-label"><span>Progress</span><span id="PLbl">0 / 8 answered</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="PFill" style="width:0%"></div></div>
+</div>
+<div class="q-block" id="QBm4_0"><div class="q-num">QUESTION 1 OF 8</div><div class="q-text">What is the correct three-part structure of an effective SOP?</div><div class="options"><label id="Lm4_0_0"><input type="radio" name="qm4_0" value="0" onchange="pick(0,0,1)">Goal → Action → Result</label><label id="Lm4_0_1"><input type="radio" name="qm4_0" value="1" onchange="pick(0,1,1)">Purpose → Scope → Procedure Steps</label><label id="Lm4_0_2"><input type="radio" name="qm4_0" value="2" onchange="pick(0,2,1)">Title → Summary → Appendix</label><label id="Lm4_0_3"><input type="radio" name="qm4_0" value="3" onchange="pick(0,3,1)">Objective → Timeline → Budget</label></div><div class="feedback" id="FBm4_0"></div></div>
+<div class="q-block" id="QBm4_1"><div class="q-num">QUESTION 2 OF 8</div><div class="q-text">Which best describes version control in document management?</div><div class="options"><label id="Lm4_1_0"><input type="radio" name="qm4_1" value="0" onchange="pick(1,0,1)">Automatically deleting old documents after 30 days</label><label id="Lm4_1_1"><input type="radio" name="qm4_1" value="1" onchange="pick(1,1,1)">Tracking document revisions with revision numbers, dates, and a change history</label><label id="Lm4_1_2"><input type="radio" name="qm4_1" value="2" onchange="pick(1,2,1)">Keeping all versions visible to all staff simultaneously</label><label id="Lm4_1_3"><input type="radio" name="qm4_1" value="3" onchange="pick(1,3,1)">Allowing any employee to update a document without approval</label></div><div class="feedback" id="FBm4_1"></div></div>
+<div class="q-block" id="QBm4_2"><div class="q-num">QUESTION 3 OF 8</div><div class="q-text">What distinguishes a document from a record in a QMS context?</div><div class="options"><label id="Lm4_2_0"><input type="radio" name="qm4_2" value="0" onchange="pick(2,0,2)">Documents are digital; records are paper-based</label><label id="Lm4_2_1"><input type="radio" name="qm4_2" value="1" onchange="pick(2,1,2)">Documents are confidential; records are public</label><label id="Lm4_2_2"><input type="radio" name="qm4_2" value="2" onchange="pick(2,2,2)">Documents define how things should be done; records prove that things were done</label><label id="Lm4_2_3"><input type="radio" name="qm4_2" value="3" onchange="pick(2,3,2)">Documents require management approval; records do not</label></div><div class="feedback" id="FBm4_2"></div></div>
+<div class="q-block" id="QBm4_3"><div class="q-num">QUESTION 4 OF 8</div><div class="q-text">Why must obsolete documents be promptly removed from use?</div><div class="options"><label id="Lm4_3_0"><input type="radio" name="qm4_3" value="0" onchange="pick(3,0,1)">To save server storage space</label><label id="Lm4_3_1"><input type="radio" name="qm4_3" value="1" onchange="pick(3,1,1)">To prevent staff from following outdated procedures that could cause errors or compliance failures</label><label id="Lm4_3_2"><input type="radio" name="qm4_3" value="2" onchange="pick(3,2,1)">To meet financial reporting requirements</label><label id="Lm4_3_3"><input type="radio" name="qm4_3" value="3" onchange="pick(3,3,1)">To reduce printing costs</label></div><div class="feedback" id="FBm4_3"></div></div>
+<div class="q-block" id="QBm4_4"><div class="q-num">QUESTION 5 OF 8</div><div class="q-text">Which is an example of a quality record?</div><div class="options"><label id="Lm4_4_0"><input type="radio" name="qm4_4" value="0" onchange="pick(4,0,2)">A document control procedure</label><label id="Lm4_4_1"><input type="radio" name="qm4_4" value="1" onchange="pick(4,1,2)">An approved SOP for packaging</label><label id="Lm4_4_2"><input type="radio" name="qm4_4" value="2" onchange="pick(4,2,2)">A completed inspection log showing pass/fail results for Lot #4421</label><label id="Lm4_4_3"><input type="radio" name="qm4_4" value="3" onchange="pick(4,3,2)">The organizational quality policy</label></div><div class="feedback" id="FBm4_4"></div></div>
+<div class="q-block" id="QBm4_5"><div class="q-num">QUESTION 6 OF 8</div><div class="q-text">Controlled distribution of documents means:</div><div class="options"><label id="Lm4_5_0"><input type="radio" name="qm4_5" value="0" onchange="pick(5,0,1)">Documents are posted publicly on the company website</label><label id="Lm4_5_1"><input type="radio" name="qm4_5" value="1" onchange="pick(5,1,1)">Only authorized users receive current versions, and the system tracks who holds which version</label><label id="Lm4_5_2"><input type="radio" name="qm4_5" value="2" onchange="pick(5,2,1)">All documents are stored in one shared folder accessible to everyone</label><label id="Lm4_5_3"><input type="radio" name="qm4_5" value="3" onchange="pick(5,3,1)">Documents are distributed based on seniority level only</label></div><div class="feedback" id="FBm4_5"></div></div>
+<div class="q-block" id="QBm4_6"><div class="q-num">QUESTION 7 OF 8</div><div class="scenario-tag">&#128203; SCENARIO-BASED</div><div class="q-text">A production operator discovers they have been following a procedure superseded 6 months ago. The updated version requires a different material specification. This represents:</div><div class="options"><label id="Lm4_6_0"><input type="radio" name="qm4_6" value="0" onchange="pick(6,0,1)">A documentation formatting issue only</label><label id="Lm4_6_1"><input type="radio" name="qm4_6" value="1" onchange="pick(6,1,1)">A potential nonconformance caused by a failure in obsolete document management</label><label id="Lm4_6_2"><input type="radio" name="qm4_6" value="2" onchange="pick(6,2,1)">An acceptable practice if products passed final inspection</label><label id="Lm4_6_3"><input type="radio" name="qm4_6" value="3" onchange="pick(6,3,1)">An opportunity for improvement with no compliance impact</label></div><div class="feedback" id="FBm4_6"></div></div>
+<div class="q-block" id="QBm4_7"><div class="q-num">QUESTION 8 OF 8</div><div class="scenario-tag">&#128203; SCENARIO-BASED</div><div class="q-text">A new employee was trained last week but the training record was never completed. An auditor arrives to review training records. What is the likely finding?</div><div class="options"><label id="Lm4_7_0"><input type="radio" name="qm4_7" value="0" onchange="pick(7,0,2)">No finding — the training occurred regardless of documentation</label><label id="Lm4_7_1"><input type="radio" name="qm4_7" value="1" onchange="pick(7,1,2)">A minor observation with no impact</label><label id="Lm4_7_2"><input type="radio" name="qm4_7" value="2" onchange="pick(7,2,2)">A nonconformance — there is no documented evidence the training took place</label><label id="Lm4_7_3"><input type="radio" name="qm4_7" value="3" onchange="pick(7,3,2)">An opportunity for improvement</label></div><div class="feedback" id="FBm4_7"></div></div>
+<button class="btn teal" id="SubBtn" onclick="submitQuiz()" disabled>Submit Quiz</button>
+</div>
+<div class="score-box" id="ScoreBox">
+  <div class="score-big" id="ScoreNum">0/8</div>
+  <div class="score-lbl">Questions Correct</div>
+  <div class="result-lbl" id="ResultLbl"></div>
+  <p style="margin-top:16px;opacity:.8">Review highlighted answers above, then return to the course.</p>
+  <a href="../index.html" style="display:inline-block;margin-top:20px;color:#00e5d4;font-weight:700;">&#8592; Back to Course Hub</a>
+</div>
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+<script>
+var QS=[{"ans": 1, "exp": "An effective SOP begins with Purpose (why it exists), Scope (who and what it covers), and Procedure Steps (the sequential task instructions)."}, {"ans": 1, "exp": "Version control systematically tracks revisions \u2014 including revision numbers, dates, and a history of what changed and why \u2014 to prevent use of obsolete documents."}, {"ans": 2, "exp": "Documents (SOPs, policies) define required methods; records (logs, reports) provide evidence those methods were followed."}, {"ans": 1, "exp": "Obsolete documents in active use create risk \u2014 personnel may follow outdated instructions, resulting in errors, nonconformances, or regulatory violations."}, {"ans": 2, "exp": "A completed inspection log with actual results is objective evidence (a record) that an inspection activity was performed."}, {"ans": 1, "exp": "Controlled distribution ensures only authorized personnel access documents, and the organization tracks who holds which version to prevent use of unauthorized copies."}, {"ans": 1, "exp": "Using obsolete documents is a document control failure \u2014 a nonconformance against the requirement to prevent unintended use of obsolete documented information."}, {"ans": 2, "exp": "Without a training record, there is no objective evidence the training occurred. In QA: if it wasn't documented, it didn't happen."}];
+var modId='m4';
+var answered=new Array(8).fill(false);
+var correct=new Array(8).fill(false);
+function pick(qi,chosen,ans){
+  if(answered[qi])return;
+  answered[qi]=true;
+  correct[qi]=(chosen===ans);
+  var opts=document.querySelectorAll('[name="qm4_'+qi+'"]');
+  opts.forEach(function(r){r.parentElement.style.pointerEvents='none';});
+  var cL=document.getElementById('Lm4_'+qi+'_'+chosen);
+  var aL=document.getElementById('Lm4_'+qi+'_'+ans);
+  if(chosen===ans){cL.classList.add('correct');}
+  else{cL.classList.add('wrong');aL.classList.add('show-ans');}
+  var fb=document.getElementById('FBm4_'+qi);
+  fb.className='feedback show '+(chosen===ans?'ok':'bad');
+  fb.innerHTML=(chosen===ans?'&#9989; Correct! ':'&#10060; Incorrect. ')+QS[qi].exp;
+  updateProg();
+}
+function updateProg(){
+  var done=answered.filter(Boolean).length;
+  document.getElementById('PLbl').textContent=done+' / 8 answered';
+  document.getElementById('PFill').style.width=(done/8*100)+'%';
+  document.getElementById('SubBtn').disabled=(done<8);
+}
+function submitQuiz(){
+  var score=correct.filter(Boolean).length;
+  var pct=Math.round(score/8*100);
+  var box=document.getElementById('ScoreBox');
+  document.getElementById('ScoreNum').textContent=score+'/8';
+  var rl=document.getElementById('ResultLbl');
+  if(pct>=75){rl.className='result-lbl pass';rl.textContent='Passed — '+pct+'%';}
+  else{rl.className='result-lbl fail';rl.textContent='Needs Review — '+pct+'% (75% required)';}
+  box.className='score-box show';
+  box.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body></html>

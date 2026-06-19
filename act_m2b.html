@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 2B — Records Audit Readiness Reflection | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 20px}
+.drag-col{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:140px;background:#f8fffe;transition:background .2s}
+.drag-col.over{background:#d4f5f2;border-color:#005f5d}
+.drag-col h4{font-size:.8rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.card-item.dragging{opacity:.4;transform:scale(.97)}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:8px 12px;font-size:.86rem;line-height:1.4;margin-bottom:6px;cursor:default}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:130px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.green{background:#28a745}.btn.green:hover{background:#218838}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.scenario-card strong{color:#003366}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;margin-bottom:8px;font-size:.91rem;line-height:1.4;cursor:pointer;transition:all .2s}
+.checklist-item:hover{border-color:#00827F;background:#f0faf9}
+.checklist-item input[type=checkbox]{accent-color:#00827F;flex-shrink:0;width:16px;height:16px;margin-top:2px}
+.checklist-item.checked{border-color:#28a745;background:#d4edda}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}.drag-area{grid-template-columns:1fr}.match-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 2 | ACTIVITY B</div><h1>Activity 2B — Records Audit Readiness Reflection</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Identify the records required for a process to be audit-ready, assign ownership, and assess the consequences of missing records.</div>
+
+<p class="section-title">Reflection Prompt</p>
+<div class="scenario-card">Think about a process you are familiar with in your current or past workplace, <strong>or use the order fulfillment process from Activity 2A</strong>.</div>
+
+<p class="section-title">Question 1</p>
+<p style="font-size:.92rem;margin-bottom:8px">What records would need to exist for this process to be considered <strong>audit-ready</strong>? List at least four specific record types.</p>
+<textarea id="r1" placeholder="e.g., Completed order receipt logs, inventory verification records, inspection sign-off sheets..."></textarea>
+
+<p class="section-title">Question 2</p>
+<p style="font-size:.92rem;margin-bottom:8px">Who would be responsible for <strong>creating and maintaining</strong> each record type you identified?</p>
+<textarea id="r2" placeholder="e.g., Order receipts maintained by Customer Service Rep; Inspection records maintained by QC Inspector..."></textarea>
+
+<p class="section-title">Question 3</p>
+<p style="font-size:.92rem;margin-bottom:8px">What would be the <strong>consequences</strong> of those records being missing or incomplete during an external audit?</p>
+<textarea id="r3" placeholder="e.g., Without inspection records, the auditor would have no evidence the quality check occurred, resulting in a nonconformance finding..."></textarea>
+
+<div class="submit-area">
+  <button class="btn teal" onclick="submitReflection()">Submit Reflection</button>
+  <div class="result" id="ref-result" style="margin-top:14px"></div>
+</div>
+</div>
+
+<div class="card" style="background:#f8f9fa">
+<p class="section-title">Key Takeaways</p>
+<div class="step"><span class="step-num">&#10003;</span><span>Records must be <strong>accurate, complete, legible, and dated</strong> at the time they are created.</span></div>
+<div class="step"><span class="step-num">&#10003;</span><span>In QA: <strong>if it wasn't documented, it didn't happen</strong> — the auditor's standard.</span></div>
+<div class="step"><span class="step-num">&#10003;</span><span>Missing records = <strong>nonconformance</strong>, not an observation or opportunity for improvement.</span></div>
+<div class="step"><span class="step-num">&#10003;</span><span>Every step in a process should have a designated record owner with a defined retention period.</span></div>
+</div>
+
+<script>
+function submitReflection(){
+  var r1=document.getElementById("r1").value.trim();
+  var r2=document.getElementById("r2").value.trim();
+  var r3=document.getElementById("r3").value.trim();
+  var res=document.getElementById("ref-result");
+  if(r1.length<30||r2.length<30||r3.length<30){res.innerHTML="&#9888; Please complete all three questions before submitting.";res.className="result show wrong";return;}
+  res.innerHTML="&#10003; Reflection submitted! Review the Key Takeaways below to compare your answers to the core principles.";
+  res.className="result show";
+}
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

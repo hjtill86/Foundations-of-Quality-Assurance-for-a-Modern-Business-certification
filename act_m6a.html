@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 6A — CAPA Lifecycle Sequencer & RCA Tool Match | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.warn-box{background:#fff8e1;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:120px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{display:inline-flex;align-items:center;background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.grey{background:#6c757d}.btn.grey:hover{background:#5a6268}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.drop-zone{border:2px dashed #00827F;border-radius:10px;padding:14px;min-height:80px;background:#f8fffe;margin-bottom:10px}
+.drop-zone h5{font-size:.78rem;font-weight:700;color:#003366;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.drop-item{background:#e8f4f3;border:2px solid #00827F;border-radius:8px;padding:7px 11px;font-size:.86rem;margin-bottom:6px}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;margin-bottom:10px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 6 | ACTIVITY A</div><h1>Activity 6A — CAPA Lifecycle Sequencer & RCA Tool Match</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Correctly sequence the CAPA lifecycle stages and match root cause analysis tools to the problem types they best address.</div>
+
+<p class="section-title">Part 1 — Sequence the CAPA Lifecycle</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Drag each CAPA stage into the correct numbered position (1 = first, 8 = last):</p>
+<div class="drag-bank" id="capa-bank"></div>
+<div id="capa-slots"></div>
+<button class="btn teal" onclick="checkCAPA()">Check CAPA Order</button>
+<div class="result" id="capa-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 2 — Root Cause Tool Matching</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Select the best root cause analysis tool for each scenario:</p>
+<div id="rca-grid"></div>
+<button class="btn teal" onclick="checkRCA()">Check RCA Matches</button>
+<div class="result" id="rca-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 3 — 5-Why Practice</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:10px">Complete the 5-Why chain for this problem: <em>"A customer received the wrong product in their order."</em></p>
+<div id="whys"></div>
+<button class="btn teal" style="margin-top:10px" onclick="checkWhys()">Submit 5-Why Chain</button>
+<div class="result" id="why-result"></div>
+</div>
+
+<script>
+var capaStages=[
+  {id:"c1",text:"Identify and document the nonconformance",ans:0},
+  {id:"c2",text:"Contain the immediate issue (containment action)",ans:1},
+  {id:"c3",text:"Conduct root cause analysis",ans:2},
+  {id:"c4",text:"Develop corrective action plan",ans:3},
+  {id:"c5",text:"Implement corrective action",ans:4},
+  {id:"c6",text:"Monitor and verify effectiveness",ans:5},
+  {id:"c7",text:"Close the CAPA record",ans:6},
+  {id:"c8",text:"Update related documents and preventive measures",ans:7},
+];
+var rcaScenarios=[
+  {prob:"A machine repeatedly produces oversized parts. The failure is traceable through a chain of operational causes.",best:"5-Why Analysis",opts:["5-Why Analysis","Fishbone (Ishikawa) Diagram","Pareto Chart","Scatter Diagram"]},
+  {prob:"Multiple defect types are occurring. Management wants to focus resources on the most frequent causes first.",best:"Pareto Chart",opts:["5-Why Analysis","Pareto Chart","Control Chart","Fishbone (Ishikawa) Diagram"]},
+  {prob:"A process failure has multiple suspected contributing categories: People, Machine, Method, Material, Environment.",best:"Fishbone (Ishikawa) Diagram",opts:["5-Why Analysis","Fishbone (Ishikawa) Diagram","Pareto Chart","Scatter Diagram"]},
+];
+var seqPlaced=new Array(8).fill(null);
+
+var bank=document.getElementById("capa-bank");
+var shuffled=capaStages.slice().sort(()=>Math.random()-.5);
+shuffled.forEach(function(s){
+  var el=document.createElement("div");
+  el.className="card-item";el.id="cb_"+s.id;el.textContent=s.text;el.draggable=true;
+  el.ondragstart=function(e){e.dataTransfer.setData("cid",s.id);};
+  bank.appendChild(el);
+});
+var sd=document.getElementById("capa-slots");
+for(var i=0;i<8;i++){
+  sd.innerHTML+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'
+    +'<span style="min-width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0">'+(i+1)+'</span>'
+    +'<div id="cs'+i+'" style="flex:1;border:2px dashed #00827F;border-radius:8px;padding:8px 12px;min-height:42px;background:#f8fffe;font-size:.88rem" ondragover="event.preventDefault()" ondrop="dropCAPA(event,'+i+')">'
+    +'<span style="color:#aab4be;font-style:italic">Drop stage here</span></div></div>';
+}
+function dropCAPA(e,i){
+  var cid=e.dataTransfer.getData("cid");
+  var slot=document.getElementById("cs"+i);
+  if(seqPlaced[i]){document.getElementById("capa-bank").appendChild(document.getElementById("cb_"+seqPlaced[i]));}
+  seqPlaced[i]=cid;
+  slot.innerHTML='<strong>'+capaStages.find(s=>s.id===cid).text+'</strong>';
+  var el=document.getElementById("cb_"+cid);if(el)el.remove();
+}
+function checkCAPA(){
+  var correct=0;
+  capaStages.forEach(function(s,i){if(seqPlaced[i]&&capaStages.find(x=>x.id===seqPlaced[i]).ans===i)correct++;});
+  var r=document.getElementById("capa-result");
+  r.innerHTML=correct+"/8 stages in correct order. "+(correct===8?"Perfect CAPA sequence!":"Correct order: Identify → Contain → Root Cause Analysis → Develop Plan → Implement → Monitor/Verify → Close Record → Update Documents.");
+  r.className="result show"+(correct<6?" wrong":"");
+}
+
+var rg=document.getElementById("rca-grid");
+rcaScenarios.forEach(function(s,i){
+  var opts=s.opts.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join("");
+  rg.innerHTML+='<div class="match-item"><strong>Scenario '+(i+1)+':</strong> '+s.prob+'<select id="rca'+i+'"><option value="">Select tool...</option>'+opts+'</select></div>';
+});
+function checkRCA(){
+  var correct=0;
+  rcaScenarios.forEach(function(s,i){if(document.getElementById("rca"+i).value===s.best)correct++;});
+  var r=document.getElementById("rca-result");
+  r.innerHTML=correct+"/3 correct. Answers: Scenario 1: 5-Why | Scenario 2: Pareto Chart | Scenario 3: Fishbone Diagram.";
+  r.className="result show"+(correct<2?" wrong":"");
+}
+
+var whyLabels=["Why did the customer receive the wrong product?","Why was the wrong item picked?","Why was the pick list incorrect?","Why did the system generate the wrong order?","Why was there no system validation check?"];
+var wg=document.getElementById("whys");
+whyLabels.forEach(function(label,i){
+  wg.innerHTML+='<div style="margin-bottom:14px">'
+    +'<label style="font-size:.86rem;color:#5a6a7e;font-weight:600">Why '+(i+1)+': '+label+'</label>'
+    +'<textarea id="w'+i+'" style="min-height:70px;margin-top:6px" placeholder="Enter your answer..."></textarea></div>';
+});
+function checkWhys(){
+  var filled=0;
+  for(var i=0;i<5;i++){if(document.getElementById("w"+i).value.trim().length>10)filled++;}
+  var r=document.getElementById("why-result");
+  if(filled<5){r.innerHTML="Please complete all 5 Why steps.";r.className="result show wrong";return;}
+  r.innerHTML="5-Why chain submitted. Model answer: Why 1: The wrong item was picked from the warehouse. Why 2: The pick list showed incorrect SKU. Why 3: The order entry system generated the wrong pick list. Why 4: Customer order data entry had a data mapping error. Why 5: No validation rule existed to cross-check SKU against customer account order history. Root Cause: Absence of input validation in the order management system.";
+  r.className="result show";
+}
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

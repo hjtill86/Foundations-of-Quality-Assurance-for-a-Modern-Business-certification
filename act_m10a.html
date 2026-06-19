@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 10A — QA Roadmap Builder & Stakeholder Strategy | QA Foundations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a2535;min-height:100vh}
+header{background:#003366;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
+header .badge{background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+header h1{font-size:1.1rem;font-weight:600;line-height:1.3}
+.back{display:inline-flex;align-items:center;gap:6px;color:#00827F;text-decoration:none;font-size:.85rem;font-weight:600;margin:20px 32px 0}
+.back:hover{color:#003366}
+.container{max-width:820px;margin:24px auto;padding:0 20px 60px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:28px;margin-bottom:24px}
+.intro-box{background:#e8f4f3;border-left:4px solid #00827F;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:22px;font-size:.91rem;line-height:1.6}
+.section-title{font-size:1rem;color:#003366;font-weight:700;margin:24px 0 12px;padding-left:12px;border-left:4px solid #00827F}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;font-size:.92rem;line-height:1.5}
+.step-num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#003366;color:#fff;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+textarea{width:100%;border:2px solid #e2e8f0;border-radius:8px;padding:12px;font-family:inherit;font-size:.92rem;resize:vertical;min-height:120px;transition:border .2s;margin-top:4px}
+textarea:focus{outline:none;border-color:#00827F}
+.btn{background:#003366;color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:#004a8f}
+.btn.teal{background:#00827F}.btn.teal:hover{background:#006b68}
+.btn.grey{background:#6c757d}.btn.grey:hover{background:#5a6268}
+.result{display:none;background:#d4edda;border:1px solid #c3e6cb;color:#155724;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;line-height:1.5}
+.result.show{display:block}
+.result.wrong{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+.scenario-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:10px;padding:18px;margin:16px 0;font-size:.92rem;line-height:1.6}
+.match-item{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:12px;margin-bottom:10px;font-size:.88rem;line-height:1.4}
+.match-item select{width:100%;margin-top:6px;border:1px solid #cdd6e0;border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.86rem;cursor:pointer}
+.match-item select:focus{outline:none;border-color:#00827F}
+.card-item{background:#fff;border:2px solid #cdd6e0;border-radius:8px;padding:8px 12px;cursor:grab;font-size:.86rem;line-height:1.4;transition:all .2s;user-select:none}
+.card-item:hover{border-color:#00827F;background:#f0faf9}
+.drag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.submit-area{margin-top:20px;padding-top:20px;border-top:1px solid #f0f4f8}
+footer{text-align:center;padding:20px;color:#8a9bb0;font-size:.79rem;margin-top:20px}
+@media(max-width:600px){header{padding:14px 16px}.container{padding:0 12px 40px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div><div class="badge">MODULE 10 | ACTIVITY A</div><h1>Activity 10A — QA Roadmap Builder & Stakeholder Strategy</h1></div></header>
+<a class="back" href="../index.html">&#8592; Back to Course Hub</a>
+<div class="container">
+
+<div class="card">
+<div class="intro-box">&#127919; <strong>Learning Objective:</strong> Sequence QA rollout phases into a logical implementation roadmap, match stakeholder types to engagement strategies, and identify QA training priorities.</div>
+
+<p class="section-title">Part 1 — QA Roadmap Phase Sequencer</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Drag each rollout activity into the correct implementation phase:</p>
+<div class="drag-bank" id="road-bank"></div>
+<div id="road-phases"></div>
+<button class="btn teal" onclick="checkRoad()">Check Roadmap Sequence</button>
+<div class="result" id="road-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 2 — Stakeholder Engagement Matching</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:12px">Match each stakeholder to their most appropriate QA engagement strategy:</p>
+<div id="stake-grid"></div>
+<button class="btn teal" onclick="checkStake()">Check Stakeholder Strategies</button>
+<div class="result" id="stake-result"></div>
+
+<p class="section-title" style="margin-top:28px">Part 3 — Training Priority Ranking</p>
+<p style="font-size:.9rem;color:#5a6a7e;margin-bottom:10px">Rank these training topics 1 (deliver first) to 4 (deliver last) for a new QA rollout:</p>
+<div id="train-grid"></div>
+<button class="btn teal" style="margin-top:10px" onclick="checkTrain()">Check Training Order</button>
+<div class="result" id="train-result"></div>
+</div>
+
+<script>
+var phases=["Phase 1: Foundation","Phase 2: Build","Phase 3: Operate","Phase 4: Improve"];
+var roadActivities=[
+  {id:"r1",text:"Conduct QA gap assessment of current state",phase:"Phase 1: Foundation"},
+  {id:"r2",text:"Gain leadership commitment and define QA scope",phase:"Phase 1: Foundation"},
+  {id:"r3",text:"Write core SOPs and document control procedure",phase:"Phase 2: Build"},
+  {id:"r4",text:"Deliver staff training on new QMS procedures",phase:"Phase 2: Build"},
+  {id:"r5",text:"Launch internal audit programme",phase:"Phase 3: Operate"},
+  {id:"r6",text:"Track quality KPIs on monthly dashboard",phase:"Phase 3: Operate"},
+  {id:"r7",text:"Run first PDCA improvement cycle",phase:"Phase 4: Improve"},
+  {id:"r8",text:"Prepare for external certification or client audit",phase:"Phase 4: Improve"},
+];
+var stakeholders=[
+  {role:"Senior Leadership / CEO",best:"Monthly KPI dashboard and business impact summary",opts:["Monthly KPI dashboard and business impact summary","SOP training session","Detailed NCR log review","Daily process walkthrough"]},
+  {role:"Operations Manager",best:"Weekly process performance review and NCR status update",opts:["Monthly KPI dashboard and business impact summary","Weekly process performance review and NCR status update","SOP training session only","Annual audit report"]},
+  {role:"Front-line Staff",best:"SOP training, visual work instructions, and toolbox talks",opts:["SOP training, visual work instructions, and toolbox talks","Monthly board report","Formal audit findings review","KPI dashboard access"]},
+  {role:"External Auditor / Client",best:"Evidence portfolio: audit trail, records, corrective action log",opts:["SOP training session","Evidence portfolio: audit trail, records, corrective action log","Weekly 1:1 update","Internal team briefing"]},
+];
+var trainTopics=[
+  {text:"QA Awareness — why quality matters and what QMS means for staff",ans:1,reason:"Foundation knowledge before any procedural training"},
+  {text:"SOP Adherence — how to follow and reference SOPs in daily work",ans:2,reason:"Operational capability needed before auditing or improvement"},
+  {text:"Internal Audit Skills — how to plan and conduct audits",ans:4,reason:"Advanced topic; requires SOPs and QMS to be in place first"},
+  {text:"NCR and CAPA Process — how to raise and respond to nonconformances",ans:3,reason:"Reactive process skill; follows procedural competence"},
+];
+
+var rb=document.getElementById("road-bank");
+roadActivities.slice().sort(()=>Math.random()-.5).forEach(function(a){
+  var el=document.createElement("div");el.className="card-item";el.id="ra_"+a.id;el.textContent=a.text;el.draggable=true;
+  el.ondragstart=function(e){e.dataTransfer.setData("rid",a.id);};rb.appendChild(el);
+});
+var phaseColors=["#003366","#00827F","#e65100","#6a1b9a"];
+var roadPlaced={};
+phases.forEach(function(ph,pi){
+  roadPlaced[ph]=[];
+  document.getElementById("road-phases").innerHTML+='<div style="margin-bottom:12px">'
+    +'<div style="background:'+phaseColors[pi]+';color:#fff;font-size:.82rem;font-weight:700;padding:8px 14px;border-radius:8px 8px 0 0;letter-spacing:.4px">'+ph+'</div>'
+    +'<div id="rp_'+pi+'" style="background:#f8f9fa;border:2px dashed #cdd6e0;border-top:none;border-radius:0 0 8px 8px;min-height:52px;padding:10px" ondragover="event.preventDefault()" ondrop="dropRoad(event,''+ph+'','+pi+')"></div></div>';
+});
+function dropRoad(e,ph,pi){
+  var rid=e.dataTransfer.getData("rid");
+  var act=roadActivities.find(a=>a.id===rid);
+  Object.keys(roadPlaced).forEach(function(p){roadPlaced[p]=roadPlaced[p].filter(x=>x!==rid);});
+  roadPlaced[ph].push(rid);
+  var el=document.getElementById("ra_"+rid);if(el)el.remove();
+  var slot=document.getElementById("rp_"+pi);
+  var d=document.createElement("div");d.style.cssText="background:#fff;border:2px solid "+phaseColors[pi]+";border-radius:7px;padding:7px 10px;font-size:.84rem;margin-bottom:6px;cursor:grab";
+  d.textContent=act.text;d.draggable=true;d.id="rplaced_"+rid;
+  d.ondragstart=function(ev){ev.dataTransfer.setData("rid",rid);d.remove();roadPlaced[ph]=roadPlaced[ph].filter(x=>x!==rid);};
+  slot.appendChild(d);
+}
+function checkRoad(){
+  var c=0;
+  roadActivities.forEach(function(a){if((roadPlaced[a.phase]||[]).includes(a.id))c++;});
+  var r=document.getElementById("road-result");
+  r.innerHTML=c+"/8 activities in correct phase. Phase 1: Gap assessment + leadership commitment. Phase 2: Write SOPs + train staff. Phase 3: Internal audits + KPI tracking. Phase 4: PDCA cycle + certification prep.";
+  r.className="result show"+(c<6?" wrong":"");
+}
+
+var sg=document.getElementById("stake-grid");
+stakeholders.forEach(function(s,i){
+  var opts=s.opts.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join("");
+  sg.innerHTML+='<div class="match-item"><strong>'+s.role+'</strong><select id="st'+i+'"><option value="">Select strategy...</option>'+opts+'</select></div>';
+});
+function checkStake(){
+  var c=0;
+  stakeholders.forEach(function(s,i){if(document.getElementById("st"+i).value===s.best)c++;});
+  var r=document.getElementById("stake-result");
+  r.innerHTML=c+"/4 matched correctly. Tailor engagement to each stakeholder's role, decision-making level, and information needs.";
+  r.className="result show"+(c<3?" wrong":"");
+}
+
+var tg=document.getElementById("train-grid");
+trainTopics.forEach(function(t,i){
+  tg.innerHTML+='<div class="match-item">'+t.text+'<select id="tr'+i+'"><option value="">Priority...</option><option value="1">1 — Deliver First</option><option value="2">2 — Second</option><option value="3">3 — Third</option><option value="4">4 — Deliver Last</option></select></div>';
+});
+function checkTrain(){
+  var c=0;
+  trainTopics.forEach(function(t,i){if(parseInt(document.getElementById("tr"+i).value)===t.ans)c++;});
+  var r=document.getElementById("train-result");
+  r.innerHTML=c+"/4 correct. Order: 1) QA Awareness, 2) SOP Adherence, 3) NCR & CAPA, 4) Internal Audit Skills.";
+  r.className="result show"+(c<3?" wrong":"");
+}
+</script>
+
+</div>
+<footer>QA Foundations for a Modern Business &nbsp;|&nbsp; &copy; 2026 Course Development Team</footer>
+</body></html>

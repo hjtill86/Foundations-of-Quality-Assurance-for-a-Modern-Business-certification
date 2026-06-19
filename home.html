@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QA Foundations Course Hub</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0a1628;color:#e8edf4;min-height:100vh}
+header{background:#003366;border-bottom:3px solid #00827F;padding:20px 40px}
+header .badge{display:inline-block;background:#00827F;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;margin-bottom:10px}
+header h1{font-size:1.55rem;font-weight:700;color:#fff;margin-bottom:4px}
+header p{font-size:.88rem;color:#8aa4c0}
+.hero{background:linear-gradient(135deg,#0f1f35 60%,#0a2540);border-bottom:1px solid #1e3554;padding:32px 40px;display:flex;gap:32px;flex-wrap:wrap;align-items:center}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.stat{background:#0a1628;border:1px solid #1e3554;border-radius:12px;padding:16px 22px;text-align:center;min-width:120px}
+.stat-num{font-size:2rem;font-weight:700;color:#00827F;line-height:1}
+.stat-lbl{font-size:.73rem;color:#5a7a9a;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.module-section{margin-bottom:36px}
+.module-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #1e3554}
+.module-num{background:#003366;border:2px solid #00827F;color:#00e5d4;font-size:.8rem;font-weight:700;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.module-title{font-size:1.08rem;font-weight:600;color:#e8edf4}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{background:#0f1f35;border:1px solid #1e3554;border-radius:12px;padding:20px;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.card:hover{border-color:#00827F;background:#0a2540;transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,130,127,.15)}
+.card-type{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.card-type.activity{color:#f59e0b}
+.card-type.quiz{color:#60a5fa}
+.card-type.exam{color:#a78bfa}
+.card-title{font-size:.95rem;font-weight:600;color:#e8edf4;margin-bottom:6px;line-height:1.4}
+.card-desc{font-size:.8rem;color:#5a7a9a;line-height:1.5}
+.card-arrow{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.card-tag{font-size:.72rem;padding:3px 10px;border-radius:12px;font-weight:600}
+.tag-act{background:#2a1f0a;color:#f59e0b;border:1px solid #713f12}
+.tag-quiz{background:#0a1f3a;color:#60a5fa;border:1px solid #1e3a8a}
+.tag-exam{background:#1a0a2e;color:#a78bfa;border:1px solid #4c1d95}
+.arrow{color:#00827F;font-size:1.1rem}
+.exam-section{margin-top:48px;padding:32px;background:linear-gradient(135deg,#0f1f35,#0a2540);border:2px solid #00827F;border-radius:16px;text-align:center}
+.exam-section h2{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:8px}
+.exam-section p{color:#8aa4c0;font-size:.9rem;margin-bottom:24px}
+.exam-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.exam-stat{text-align:center}
+.exam-stat .num{font-size:1.5rem;font-weight:700;color:#00e5d4}
+.exam-stat .lbl{font-size:.72rem;color:#5a7a9a;text-transform:uppercase;letter-spacing:.4px}
+.btn-exam{display:inline-block;background:#00827F;color:#fff;padding:15px 40px;border-radius:10px;text-decoration:none;font-size:1rem;font-weight:700;transition:all .2s;letter-spacing:.3px}
+.btn-exam:hover{background:#006b68;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,130,127,.35)}
+footer{background:#0f1f35;border-top:1px solid #1e3554;padding:24px 40px;text-align:center;font-size:.8rem;color:#5a7a9a;margin-top:60px}
+@media(max-width:600px){header{padding:16px 20px}.container{padding:24px 16px}.hero{padding:24px 20px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">LEARNWORLDS COURSE HUB</div>
+  <h1>Quality Assurance Foundations for a Modern Business</h1>
+  <p>A Complete 10-Module Certification Course &mdash; Self-Paced | Certificate of Completion | 75% Passing Score</p>
+</header>
+<div class="hero">
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Modules</div></div>
+    <div class="stat"><div class="stat-num">30</div><div class="stat-lbl">Lessons</div></div>
+    <div class="stat"><div class="stat-num">20</div><div class="stat-lbl">Activities</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Quizzes</div></div>
+    <div class="stat"><div class="stat-num">60</div><div class="stat-lbl">Exam Qs</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- MODULE 1 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">01</div>
+    <div class="module-title">Quality Assurance Fundamentals</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m1a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">QA vs. QC Sorting</div>
+      <div class="card-desc">Drag-and-drop 10 scenario cards into QA or QC buckets to distinguish preventive from detective quality activities.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Drag &amp; Drop</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m1b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Role Identification Case Study</div>
+      <div class="card-desc">Read a manufacturing scenario and identify QA roles, responsibilities, and the prevention mindset in action.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Case Study</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m1.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 1 Knowledge Check</div>
+      <div class="card-desc">8 multiple-choice questions covering QA fundamentals, definitions, and core principles. Instant feedback included.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 2 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">02</div>
+    <div class="module-title">Quality Management Systems (QMS)</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m2a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">Build a Process Map</div>
+      <div class="card-desc">Sequence 8 process steps, assign process owners, and define boundaries for a complete QMS process map.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Interactive</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m2b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Records Audit Readiness Reflection</div>
+      <div class="card-desc">Evaluate QMS documentation readiness with a 3-question written reflection exercise on records and evidence trails.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Reflection</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m2.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 2 Knowledge Check</div>
+      <div class="card-desc">8 questions on QMS structure, principles, process ownership, and documentation requirements.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 3 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">03</div>
+    <div class="module-title">Standards &amp; Regulatory Context (ISO 9001)</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m3a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">ISO 9001 Clause Matching</div>
+      <div class="card-desc">Match 8 ISO 9001 clause names to their descriptions using dropdown selectors. Tests clause-level fluency.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Matching</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m3b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Compliance Gap Scenario — GreenPack</div>
+      <div class="card-desc">Analyze a manufacturing compliance scenario and identify ISO 9001 gaps with written findings and recommendations.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Scenario</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m3.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 3 Knowledge Check</div>
+      <div class="card-desc">8 questions on ISO 9001 structure, regulatory frameworks, clause requirements, and certification concepts.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 4 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">04</div>
+    <div class="module-title">Documentation &amp; SOPs</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m4a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">SOP Builder</div>
+      <div class="card-desc">Drag-and-drop SOP sections into correct sequence, match purposes, and complete document control checklists.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Builder</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m4b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Document Control Case Study — Meridian</div>
+      <div class="card-desc">Analyze document control failures at Meridian Services and write corrective findings using SOP principles.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Case Study</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m4.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 4 Knowledge Check</div>
+      <div class="card-desc">8 questions on SOP structure, document control, version management, and record retention requirements.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 5 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">05</div>
+    <div class="module-title">Risk Management &amp; Controls</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m5a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">Risk Register Builder</div>
+      <div class="card-desc">Build a 5-row interactive risk register with severity/occurrence/detection scoring and RPN calculation.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Interactive Table</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m5b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Risk Control Evaluation</div>
+      <div class="card-desc">Evaluate a hierarchy of controls scenario and write a risk control analysis using written response prompts.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Analysis</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m5.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 5 Knowledge Check</div>
+      <div class="card-desc">8 questions on risk identification, FMEA methodology, RPN scoring, and mitigation strategies.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 6 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">06</div>
+    <div class="module-title">CAPA &amp; Root Cause Analysis</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m6a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">CAPA Lifecycle Sequencer &amp; RCA Tools</div>
+      <div class="card-desc">Sequence the CAPA lifecycle, match RCA tools to scenarios, and practice a 5-Why analysis with guided prompts.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Multi-Part</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m6b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">NovaBake CAPA Case Study</div>
+      <div class="card-desc">Complete a full CAPA for a baking facility NCR: fishbone diagram, containment, corrective/preventive action, and verification.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Case Study</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m6.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 6 Knowledge Check</div>
+      <div class="card-desc">8 questions on CAPA methodology, root cause tools, 5-Why analysis, and nonconformance management.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 7 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">07</div>
+    <div class="module-title">Metrics, KPIs &amp; Statistical Process Control</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m7a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">KPI Classification &amp; SPC Signal ID</div>
+      <div class="card-desc">Classify KPIs as leading or lagging, evaluate SMART criteria, and identify SPC control chart signals.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Classification</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m7b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">KPI Dashboard Design — ClearPath</div>
+      <div class="card-desc">Design a quality KPI dashboard for a staffing agency scenario with metric selection, targets, and interpretation.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Design Exercise</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m7.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 7 Knowledge Check</div>
+      <div class="card-desc">8 questions on KPIs, SPC charts, control limits, process capability, and metrics interpretation.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 8 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">08</div>
+    <div class="module-title">Audit Readiness &amp; Internal Audits</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m8a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">Audit Evidence &amp; Finding Classification</div>
+      <div class="card-desc">Classify audit evidence types, sequence audit phases, and rate finding severity (major/minor/OFI).</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Classification</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m8b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">Vantage Healthcare Audit Report</div>
+      <div class="card-desc">Write NCR findings and develop an action plan based on a healthcare facility internal audit scenario.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Written Report</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m8.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 8 Knowledge Check</div>
+      <div class="card-desc">8 questions on audit planning, evidence collection, audit report writing, and finding classification.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 9 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">09</div>
+    <div class="module-title">Reporting &amp; Continuous Improvement (PDCA)</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m9a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">PDCA Sorter &amp; NCR Classification</div>
+      <div class="card-desc">Sort PDCA actions, classify NCR severity, and prioritize an improvement backlog in this three-part activity.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Multi-Part</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m9b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">EliteLink CI Plan</div>
+      <div class="card-desc">Develop a continuous improvement plan using PDCA cycle, NCR prioritization, and improvement backlog management.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">CI Plan</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m9.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 9 Knowledge Check</div>
+      <div class="card-desc">8 questions on PDCA cycle, NCR documentation, improvement backlogs, and reporting best practices.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- MODULE 10 -->
+<div class="module-section">
+  <div class="module-header">
+    <div class="module-num">10</div>
+    <div class="module-title">Implementing QA in Your Business</div>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="act_m10a.html">
+      <div class="card-type activity">Activity A</div>
+      <div class="card-title">QA Roadmap Phase Builder</div>
+      <div class="card-desc">Build a phased QA roadmap, match stakeholders to roles, and prioritize training initiatives for rollout.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Builder</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="act_m10b.html">
+      <div class="card-type activity">Activity B</div>
+      <div class="card-title">BrightCore QA Implementation Plan</div>
+      <div class="card-desc">Create a 90-day QA implementation roadmap addressing stakeholder resistance and phased timeline planning.</div>
+      <div class="card-arrow"><span class="card-tag tag-act">Implementation</span><span class="arrow">&#8594;</span></div>
+    </a>
+    <a class="card" href="quiz_m10.html">
+      <div class="card-type quiz">Module Quiz</div>
+      <div class="card-title">Module 10 Knowledge Check</div>
+      <div class="card-desc">8 questions on QA implementation strategy, stakeholder management, culture change, and roadmap planning.</div>
+      <div class="card-arrow"><span class="card-tag tag-quiz">8 Questions</span><span class="arrow">&#8594;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- FINAL EXAM -->
+<div class="exam-section">
+  <h2>🎓 Final Certification Exam</h2>
+  <p>Complete all 10 modules before attempting the final exam. A score of 75% or higher earns your Certificate of Completion.</p>
+  <div class="exam-stats">
+    <div class="exam-stat"><div class="num">60</div><div class="lbl">Questions</div></div>
+    <div class="exam-stat"><div class="num">90</div><div class="lbl">Minutes</div></div>
+    <div class="exam-stat"><div class="num">75%</div><div class="lbl">Pass Score</div></div>
+    <div class="exam-stat"><div class="num">45/60</div><div class="lbl">Correct to Pass</div></div>
+  </div>
+  <a class="btn-exam" href="final_exam.html">Launch Final Exam &rarr;</a>
+</div>
+
+</div><!-- /container -->
+<footer>
+  &copy; 2026 Quality Assurance Foundations for a Modern Business &mdash; All Rights Reserved &nbsp;|&nbsp; LearnWorlds Course Package
+</footer>
+</body>
+</html>
